@@ -16,6 +16,7 @@ namespace CSAlumni
     public partial class Form1 : Form
     {
        private string url = "http://192.168.0.19:3000/users.json";
+       private string chrisUser = "http://192.168.0.19:3000/users/41.json";
        private string username = "admin";
        private string password = "taliesin";
         public Form1()
@@ -28,9 +29,10 @@ namespace CSAlumni
         {
          
 
-            SendGetRequest get = new SendGetRequest(username, password);
-            get.getUserList(url);
-            
+        //  SendGetRequest get = new SendGetRequest(username, password, chrisUser);
+       //    get.getUserList();
+        SendPatchRequest patchRequest = new SendPatchRequest(username, password);
+         patchRequest.patchUser(chrisUser, "");
           
           
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using System.Web;
 
 namespace CSAlumni
 {
@@ -24,11 +25,13 @@ namespace CSAlumni
 
        public void getUserList()
        {
+           
            WebRequest request;
            String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Username + ":" + Password));
-         
+            
            request = WebRequest.Create(Url);
            request.Headers.Add("Authorization", "Basic " + encoded);
+           
 
            try
            {
@@ -37,8 +40,9 @@ namespace CSAlumni
 
                string line = "";
                line = reader.ReadLine();
+               Console.WriteLine(line);
                //Parses fetched JSON string to User objects.
-               List<User> users = JsonConvert.DeserializeObject<List<User>>(line);
+            //   List<User> users = JsonConvert.DeserializeObject<List<User>>(line);
             
            }
            catch (WebException ex)
