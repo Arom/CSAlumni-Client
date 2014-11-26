@@ -1,0 +1,2 @@
+CSAlumni/bin
+CSAlumni/bin/*
