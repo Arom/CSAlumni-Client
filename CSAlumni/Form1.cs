@@ -31,8 +31,11 @@ namespace CSAlumni
 
         //  SendGetRequest get = new SendGetRequest(username, password, chrisUser);
        //    get.getUserList();
-        SendPatchRequest patchRequest = new SendPatchRequest(username, password);
-         patchRequest.patchUser(chrisUser, "");
+    //    SendPatchRequest patchRequest = new SendPatchRequest(username, password);
+       //  patchRequest.patchUser(chrisUser, user);
+            SendPostRequest sendPost = new SendPostRequest(username, password);
+            User user = new User("Krzys", "Ilkow", "07871534507", 2013, false, "aromchris@hotmail.com");
+            sendPost.addNewUser("http://192.168.0.19:3000/users.json", user);
           
           
         }

@@ -19,6 +19,15 @@ namespace CSAlumni
      //  public string Created_At { get; set; }
      //   public string Updated_At { get; set; }
 
-        
+       public User(string firstname, string surname, string phone, int grad_year, Boolean jobs, string email)
+       {
+           this.firstname = firstname;
+           this.surname = surname;
+           this.phone = phone;
+           this.grad_year = grad_year;
+           this.jobs = jobs;
+           this.email = email;
+               
+       }
     }
 }

@@ -18,7 +18,7 @@ namespace CSAlumni
             this.Password = password;
         }
 
-        public void patchUser(string url, string data)
+        public void patchUser(string url, User user)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Username + ":" + Password));
@@ -26,15 +26,6 @@ namespace CSAlumni
             request.ContentType = "application/json";
 
             request.Method = "PATCH";
-          User user = new User();
-           user.firstname = "wat";
-            user.surname ="surnameWat";
-            user.phone = "666";
-            user.jobs = true;
-            user.email = "fas@gfasd.dd";
-           user.grad_year = 1999;
-            
-
           var updateUser = JsonConvert.SerializeObject(user);
       
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(updateUser);
