@@ -34,8 +34,10 @@ namespace CSAlumni
     //    SendPatchRequest patchRequest = new SendPatchRequest(username, password);
        //  patchRequest.patchUser(chrisUser, user);
             SendPostRequest sendPost = new SendPostRequest(username, password);
-            User user = new User("Krzys", "Ilkow", "07871534507", 2013, false, "aromchris@hotmail.com");
-            sendPost.addNewUser("http://192.168.0.19:3000/users.json", user);
+        //    User user = new User("Krzys", "Ilkow", "07871534507", 2013, false, "aromchris@hotmail.com");
+          // sendPost.addNewUser("http://192.168.0.19:3000/users.json", user);
+            Broadcast broadcast = new Broadcast("SomeContent", "witter");
+            sendPost.addNewBroadcast("http://192.168.0.19:3000/broadcasts.json", broadcast);
           
           
         }

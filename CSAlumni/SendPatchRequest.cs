@@ -26,11 +26,11 @@ namespace CSAlumni
             request.ContentType = "application/json";
 
             request.Method = "PATCH";
-          var updateUser = JsonConvert.SerializeObject(user);
-      
+            var updateUser = JsonConvert.SerializeObject(user);
+
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(updateUser);
             var os = request.GetRequestStream();
-          os.Write(toSend, 0, toSend.Length);
+            os.Write(toSend, 0, toSend.Length);
 
             WebResponse response;
 
@@ -42,12 +42,12 @@ namespace CSAlumni
             {
                 response = ex.Response;
             }
-           
+
 
             StreamReader sr = new StreamReader(response.GetResponseStream());
             Console.WriteLine(sr.ReadToEnd().Trim());
 
-            
+
         }
     }
 }
