@@ -16,7 +16,8 @@ namespace CSAlumni
     public partial class Form1 : Form
     {
         private string url = "http://178.62.230.34:3000/users.json";
-       private string chrisUser = "http://192.168.0.19:3000/users/41.json";
+        private string chrisUser = "http://178.62.230.34:3000/users/41.json";
+           private string broadcastUrl = "http://178.62.230.34:3000/broadcasts.json";
        private string username = "admin";
        private string password = "taliesin";
         public Form1()
@@ -27,20 +28,20 @@ namespace CSAlumni
 
         private void Form1_Load(object sender, EventArgs e)
         {
-         
 
-        //  SendGetRequest get = new SendGetRequest(username, password, url);
-        //   get.getUserList();
-    //    SendPatchRequest patchRequest = new SendPatchRequest(username, password);
+              SendPatchRequest patchRequest = new SendPatchRequest(username, password);
+              SendPostRequest sendPost = new SendPostRequest(username, password);
+              SendGetRequest get = new SendGetRequest(username, password, url);
+              User user = new User("Krzyso", "Ilkedsow", "07871534507", 2013, false, "a1rom11zorchris@hotmail.com");
+              Feeds feeds = new Feeds(1, 0, 0, 0, 1, "cs-alumni");
+              Broadcast broadcast = new Broadcast("Some22Content22", feeds);
+
+            //  sendPost.addNew(broadcastUrl,broadcast);
+         // get.getUserList();
        //  patchRequest.patchUser(chrisUser, user);
-            SendPostRequest sendPost = new SendPostRequest(username, password);
-        //    User user = new User("Krzys", "Ilkow", "07871534507", 2013, false, "aromchris@hotmail.com");
-       //    sendPost.addNewUser("http://192.168.0.19:3000/users.json", user);
-            Feeds feeds = new Feeds(1, 0, 0, 0, 1, "cs-alumni");
-            Broadcast broadcast = new Broadcast("SomeContent2", feeds);
-            sendPost.addNewBroadcast("http://178.62.230.34:3000/broadcasts.json", broadcast);
-          
-          
+        //   sendPost.addNewUser(url, user);
+        //    sendPost.addNewBroadcast("http://178.62.230.34:3000/broadcasts.json", broadcast);
+
         }
     }
 }

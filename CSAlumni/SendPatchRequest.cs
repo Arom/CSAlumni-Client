@@ -12,16 +12,18 @@ namespace CSAlumni
     class SendPatchRequest
     {
         string Password, Username;
+        String encoded;
+
         public SendPatchRequest(string username, string password)
         {
             this.Username = username;
             this.Password = password;
+            encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Username + ":" + Password));
         }
 
         public void patchUser(string url, User user)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Username + ":" + Password));
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";
 
@@ -42,12 +44,6 @@ namespace CSAlumni
             {
                 response = ex.Response;
             }
-
-
-            StreamReader sr = new StreamReader(response.GetResponseStream());
-            Console.WriteLine(sr.ReadToEnd().Trim());
-
-
         }
     }
 }

@@ -11,15 +11,11 @@ namespace CSAlumni
     class Broadcast
     {
         public string content { get; set; }
-     //   public int user_id { get; set; }
-     //   public string feeds { get; set; }
         public Feeds feeds { get; set; }
 
-        public Broadcast(string content, /*int user_id,*/ Feeds feeds)
+        public Broadcast(string content, Feeds feeds)
         {
             this.content = content;
-        //    this.user_id = user_id;
-       //     this.feeds = feeds;
             this.feeds = feeds;
         }
 

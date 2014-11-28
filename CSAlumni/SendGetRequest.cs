@@ -15,35 +15,30 @@ namespace CSAlumni
         private string Username;
         private string Password;
         private string Url;
+        private string encoded;
         public SendGetRequest(string username, string password, string url)
         {
             this.Username = username;
             this.Password = password;
             this.Url = url;
-
+            encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Username + ":" + Password));
         }
 
        public void getUserList()
        {
-           
            WebRequest request;
-           String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Username + ":" + Password));
-            
            request = WebRequest.Create(Url);
            request.Headers.Add("Authorization", "Basic " + encoded);
            
-
            try
            {
             Stream stream = request.GetResponse().GetResponseStream();
                StreamReader reader = new StreamReader(stream);
-
                string line = "";
                line = reader.ReadLine();
-               Console.WriteLine(line);
                //Parses fetched JSON string to User objects.
-            //   List<User> users = JsonConvert.DeserializeObject<List<User>>(line);
-            
+              List<User> users = JsonConvert.DeserializeObject<List<User>>(line);
+              Console.WriteLine(users[0].url);
            }
            catch (WebException ex)
            {
