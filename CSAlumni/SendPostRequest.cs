@@ -62,9 +62,9 @@ namespace CSAlumni
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";
             request.Method = "POST";
-          //  var createBroadcast = JsonConvert.SerializeObject(broadcast);
-          //  string createBroadcast = "{\"broadcast\": {\"content\": \"Test45 \",\"feeds\": {\"twitter\": 1, \"alumni_email\":\"1\"}}}";
-            string createBroadcast = "{\"broadcast\": {\"content\": \"Test45 \",\"feeds\": [1]}}";
+            var createBroadcast = JsonConvert.SerializeObject(broadcast);
+          //  string createBroadcast = "{\"broadcast\": {\"content\": \"dupa\"},\"feeds\": {\"alumni_email\": \"cs-alumni-jobs\",\"email\": \"1\", \"twitter\":\"1\"}}";
+          // string createBroadcast = "{\"broadcast\": {\"content\": \"dupa\"},\"feeds\": [\"Email\", \"Twitter\", \"Atom\"]}";
             Console.WriteLine(createBroadcast);
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(createBroadcast);
             var os = request.GetRequestStream();
