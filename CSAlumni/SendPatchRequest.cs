@@ -11,8 +11,7 @@ namespace CSAlumni
 {
     class SendPatchRequest
     {
-        string Password, Username;
-        String encoded;
+        string Password, Username, encoded;
 
         public SendPatchRequest(string username, string password)
         {
@@ -26,16 +25,12 @@ namespace CSAlumni
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";
-
             request.Method = "PATCH";
             var updateUser = JsonConvert.SerializeObject(user);
-
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(updateUser);
             var os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
-
             WebResponse response;
-
             try
             {
                 response = request.GetResponse();
