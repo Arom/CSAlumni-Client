@@ -29,18 +29,17 @@ namespace CSAlumni
 
         }
         private void buildUserListView(List<User> users) {
-
+            foreach(User user in users){
+                ListViewItem item = new ListViewItem();
+                item.Text = user.Surname;
+                item.SubItems.Add(user.Firstname);
+                item.SubItems.Add(user.Email);
+                item.SubItems.Add(""+user.Grad_year);
+                listView1.Items.Add(item);
+            }
         }
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            //    string[] user = new string[4];
-            //ListViewItem itm;
-            //user[0] = "Ilkow";
-            //user[1] = "Krzys";
-            //user[2] = "mail@mail.eu";
-            //user[3] = "2014";
-            //itm = new ListViewItem(user);
-            //listView1.Items.Add(itm);
               sendPatch = new SendPatchRequest(username, password, url);
               sendPost = new SendPostRequest(username, password, url);
               sendGet = new SendGetRequest(username, password, url);
@@ -64,7 +63,7 @@ namespace CSAlumni
       
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e) {
                 DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo);
-            if (result != DialogResult.Yes) {
+            if (result == DialogResult.No) {
                 e.Cancel = true;
             } 
         }
