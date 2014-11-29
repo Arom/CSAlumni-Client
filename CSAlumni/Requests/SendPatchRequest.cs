@@ -16,16 +16,19 @@ namespace CSAlumni
         string password;
         string username;
         string encoded;
+        string url;
 
-        public SendPatchRequest(string username, string password)
+        public SendPatchRequest(string username, string password, string url)
         {
             this.username = username;
             this.password = password;
+            this.url = url;
             encoded = StringHelper.EncodeString(username, password);
         }
 
         public void patchUser(string url, User user)
         {
+           
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";

@@ -13,26 +13,18 @@ namespace CSAlumni
 {
     class SendDeleteRequest
     {
-        string Username, Password, encoded;
-        public SendDeleteRequest(string username, string password)
+        string username;
+        string password;
+        string encoded;
+        string url;
+        public SendDeleteRequest(string username, string password, string url)
         {
-            this.Username = username;
-            this.Password = password;
-            encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Username + ":" + Password));
+            this.username = username;
+            this.password = password;
+            this.url = url;
+            encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
         }
-        public void fetchCSRF(string url)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Headers.Add("Authorization", "Basic " + encoded);
-            request.ContentType = "application/json";
-            
-            request.Method = "GET";
-            request.Headers.Add("X-CSRF-Token", "Fetch");
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            string token = response.Headers.Get("X-CSRF-Token");
-            response.Close();
-            Trace.WriteLine(token);
-        }
+ 
         public void delete(string url)
         {
             WebRequest request = WebRequest.Create(url);

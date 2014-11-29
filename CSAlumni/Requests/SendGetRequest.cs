@@ -21,7 +21,7 @@ namespace CSAlumni {
             this.url = url;
             encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
         }
-        public void getBroadcastList(string url) {
+        public void getBroadcastList() {
             WebRequest request = WebRequest.Create(url + "/broadcasts.json");
             request.Headers.Add("Authorization", "Basic " + encoded);
             try {
@@ -35,25 +35,28 @@ namespace CSAlumni {
                 int responseCode = (int)response.StatusCode;
                 Trace.WriteLine("Error occured, Status Code " + responseCode);
             }
-           
         }
-        public void getUserList(string url) {
+        public List<User> getUserList() {
+            url = url + "/users.json";
+            List<User> users = null;
             WebRequest request = WebRequest.Create(url);
             request.Headers.Add("Authorization", "Basic " + encoded);
             try {
                 response = (HttpWebResponse)request.GetResponse();
                 using (StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream())) {
                     string line = sr.ReadLine();
-                    List<User> users = JsonConvert.DeserializeObject<List<User>>(line);
+                    Trace.WriteLine(line);
+                     users = JsonConvert.DeserializeObject<List<User>>(line);
                 }
             } catch (WebException ex) {
                 response = (HttpWebResponse)ex.Response;
                 int responseCode = (int)response.StatusCode;
                 Trace.WriteLine("Error. Status Code : " + responseCode);
             }
+            return users;
         }
 
-        public Boolean LoginIsValid(string url) {
+        public Boolean LoginIsValid() {
             url = url + "/users.json";
             Boolean isValid = false;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);

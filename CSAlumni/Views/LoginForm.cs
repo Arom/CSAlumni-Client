@@ -17,7 +17,7 @@ namespace CSAlumni.Views {
                 MessageBox.Show("Password or username fields cannot be empty", "Error");
             } else {
                 SendGetRequest get = new SendGetRequest(username, password, "http://178.62.230.34/");
-                Boolean valid = get.LoginIsValid("http://178.62.230.34/");
+                Boolean valid = get.LoginIsValid();
                 if (!valid) {
                     MessageBox.Show("Incorrect username or password", "Authentication Error");
                 } else {
