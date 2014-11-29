@@ -21,6 +21,7 @@ namespace CSAlumni
             this.Password = password;
             encoded = StringHelper.EncodeString(username, password);
         }
+       
         //TODO : Auth, normal user not allowed 
         public void addNew(string url, Object myObject)
         {

@@ -51,6 +51,12 @@
     <Compile Include="Models\Broadcast.cs" />
     <Compile Include="Models\Feeds.cs" />
     <Compile Include="Utils\StringHelper.cs" />
+    <Compile Include="Views\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,9 @@
     <Compile Include="Requests\SendPatchRequest.cs" />
     <Compile Include="Requests\SendPostRequest.cs" />
     <Compile Include="Models\User.cs" />
+    <EmbeddedResource Include="Views\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

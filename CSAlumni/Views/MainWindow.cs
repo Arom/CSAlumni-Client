@@ -16,9 +16,7 @@ namespace CSAlumni
     public partial class MainWindow : Form
     {
         //178.62.230.34
-        private string url = "http://192.168.0.19:3000/users.json";
-        private string chrisUser = "http://192.168.0.19:3000/users/41.json";
-        private string broadcastUrl = "http://192.168.0.19:3000/broadcasts.json";
+        private string url = "http://178.62.230.34/";
        private string username = "admin";
        private string password = "taliesin";
         public MainWindow()
@@ -26,7 +24,7 @@ namespace CSAlumni
             InitializeComponent();
 
         }
-
+       
         private void MainWindow_Load(object sender, EventArgs e)
         {
 
@@ -37,14 +35,23 @@ namespace CSAlumni
             //  User user = new User("Krzyso", "Ilkedsow", "078271534507", 2013, false, "a1rom11zordaschris@hotmail.com");
               Feeds feeds = new Feeds(1, 0, 0, 0, 1, "cs-alumni");
               Broadcast broadcast = new Broadcast("Some22Content22", feeds);
+            
            //   delete.fetchCSRF(chrisUser);
-              delete.delete("http://192.168.0.19:3000/broadcasts/24.json");
+            //  delete.delete("http://192.168.0.19:3000/broadcasts/24.json");
             //  sendPost.addNew(broadcastUrl,broadcast);
-      //    get.getUserList();
+         // get.getUserList();
        //  patchRequest.patchUser(chrisUser, user);
            //sendPost.addNew(url, user);
         //    sendPost.addNewBroadcast("http://178.62.230.34:3000/broadcasts.json", broadcast);
 
+        }
+
+      
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e) {
+                DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo);
+            if (result != DialogResult.Yes) {
+                e.Cancel = true;
+            } 
         }
     }
 }
