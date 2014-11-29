@@ -7,17 +7,21 @@ using System.Net;
 using System.Web;
 using System.IO;
 using Newtonsoft.Json;
+using CSAlumni.Utils;
+using System.Diagnostics;
 namespace CSAlumni
 {
     class SendPatchRequest
     {
-        string Password, Username, encoded;
+        string password;
+        string username;
+        string encoded;
 
         public SendPatchRequest(string username, string password)
         {
-            this.Username = username;
-            this.Password = password;
-            encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Username + ":" + Password));
+            this.username = username;
+            this.password = password;
+            encoded = StringHelper.EncodeString(username, password);
         }
 
         public void patchUser(string url, User user)
@@ -26,9 +30,9 @@ namespace CSAlumni
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";
             request.Method = "PATCH";
-            var updateUser = JsonConvert.SerializeObject(user);
+            string updateUser = JsonConvert.SerializeObject(user);
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(updateUser);
-            var os = request.GetRequestStream();
+            Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
             WebResponse response;
             try
@@ -38,6 +42,10 @@ namespace CSAlumni
             catch (WebException ex)
             {
                 response = ex.Response;
+            }
+            using (StreamReader sr = new StreamReader(response.GetResponseStream())) 
+            {
+                Trace.WriteLine(sr.ReadToEnd().Trim());
             }
         }
     }

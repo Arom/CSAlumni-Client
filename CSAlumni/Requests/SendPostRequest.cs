@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.IO;
 using Newtonsoft.Json;
+using CSAlumni.Utils;
+using System.Diagnostics;
 
 namespace CSAlumni
 {
@@ -17,9 +19,8 @@ namespace CSAlumni
         {
             this.Username = username;
             this.Password = password;
-            encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(Username + ":" + Password));
+            encoded = StringHelper.EncodeString(username, password);
         }
-
         //TODO : Auth, normal user not allowed 
         public void addNew(string url, Object myObject)
         {
@@ -27,9 +28,9 @@ namespace CSAlumni
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";
             request.Method = "POST";
-            var newObject = JsonConvert.SerializeObject(myObject);
+            string newObject = JsonConvert.SerializeObject(myObject).ToLower();
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(newObject);
-            var os = request.GetRequestStream();
+            Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
             WebResponse response;
             try
@@ -40,8 +41,11 @@ namespace CSAlumni
             {
                 response = ex.Response;
             }
-            // StreamReader sr = new StreamReader(response.GetResponseStream());
-            // Console.WriteLine(sr.ReadToEnd().Trim());
+            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+            {
+                Trace.WriteLine(sr.ReadToEnd().Trim());
+            }
+          
         }
     }
 
