@@ -12,6 +12,8 @@ namespace CSAlumni {
         private string password;
         private string url;
         private string username;
+        private HttpWebResponse response;
+
 
         public SendGetRequest(string username, string password, string url) {
             this.username = username;
@@ -21,18 +23,33 @@ namespace CSAlumni {
         }
         public void getBroadcastList(string url) {
             WebRequest request = WebRequest.Create(url + "/broadcasts.json");
-
+            request.Headers.Add("Authorization", "Basic " + encoded);
+            try {
+                response = (HttpWebResponse)request.GetResponse();
+                using (StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream())) {
+                    string line = sr.ReadLine();
+                    List<Broadcast> broadcasts = JsonConvert.DeserializeObject<List<Broadcast>>(line);
+                }
+            } catch (WebException ex) {
+                response = (HttpWebResponse)ex.Response;
+                int responseCode = (int)response.StatusCode;
+                Trace.WriteLine("Error occured, Status Code " + responseCode);
+            }
+           
         }
         public void getUserList(string url) {
+            WebRequest request = WebRequest.Create(url);
+            request.Headers.Add("Authorization", "Basic " + encoded);
             try {
-                WebRequest request = WebRequest.Create(url);
-                request.Headers.Add("Authorization", "Basic " + encoded);
+                response = (HttpWebResponse)request.GetResponse();
                 using (StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream())) {
                     string line = sr.ReadLine();
                     List<User> users = JsonConvert.DeserializeObject<List<User>>(line);
                 }
             } catch (WebException ex) {
-                Console.WriteLine(ex.ToString());
+                response = (HttpWebResponse)ex.Response;
+                int responseCode = (int)response.StatusCode;
+                Trace.WriteLine("Error. Status Code : " + responseCode);
             }
         }
 
@@ -43,7 +60,6 @@ namespace CSAlumni {
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";
             request.Method = "GET";
-            HttpWebResponse response;
             try {
                 response = (HttpWebResponse)request.GetResponse();
 
@@ -55,9 +71,9 @@ namespace CSAlumni {
                 response = (HttpWebResponse)ex.Response;
                 int responseCode = (int)response.StatusCode;
                 if (responseCode == 41) {
-                    Trace.WriteLine("Invalid login credentials");
+                    Trace.WriteLine("Invalid login credentials. Status code: "+ responseCode);
                 } else {
-                    Trace.WriteLine((int)response.StatusCode);
+                    Trace.WriteLine(responseCode);
                 }
             }
             return isValid;
