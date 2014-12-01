@@ -21,31 +21,32 @@ namespace CSAlumni {
             this.url = url;
             encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
         }
-        public void getBroadcastList() {
-            WebRequest request = WebRequest.Create(url + "/broadcasts.json");
-            request.Headers.Add("Authorization", "Basic " + encoded);
-            try {
-                response = (HttpWebResponse)request.GetResponse();
-                using (StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream())) {
-                    string line = sr.ReadLine();
-                    List<Broadcast> broadcasts = JsonConvert.DeserializeObject<List<Broadcast>>(line);
-                }
-            } catch (WebException ex) {
-                response = (HttpWebResponse)ex.Response;
-                int responseCode = (int)response.StatusCode;
-                Trace.WriteLine("Error occured, Status Code " + responseCode);
-            }
-        }
-        public List<User> getUserList() {
-            url = url + "/users.json";
-            List<User> users = null;
-            WebRequest request = WebRequest.Create(url);
+        public List<Broadcast> getBroadcastList() {
+            List<Broadcast> broadcasts = null;
+           WebRequest request = WebRequest.Create(url + "broadcasts.json?per_page=200");
             request.Headers.Add("Authorization", "Basic " + encoded);
             try {
                 response = (HttpWebResponse)request.GetResponse();
                 using (StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream())) {
                     string line = sr.ReadLine();
                     Trace.WriteLine(line);
+                    broadcasts = JsonConvert.DeserializeObject<List<Broadcast>>(line);
+                }
+            } catch (WebException ex) {
+                response = (HttpWebResponse)ex.Response;
+                int responseCode = (int)response.StatusCode;
+                Trace.WriteLine("Error occured, Status Code " + responseCode);
+            }
+            return broadcasts;
+        }
+        public List<User> getUserList() {
+            List<User> users = null;
+            WebRequest request = WebRequest.Create(url + "/users.json?per_page=200");
+            request.Headers.Add("Authorization", "Basic " + encoded);
+            try {
+                response = (HttpWebResponse)request.GetResponse();
+                using (StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream())) {
+                    string line = sr.ReadLine();
                      users = JsonConvert.DeserializeObject<List<User>>(line);
                 }
             } catch (WebException ex) {

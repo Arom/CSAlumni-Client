@@ -1,7 +1,9 @@
-﻿using System;
+﻿using CSAlumni.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -23,12 +25,16 @@ namespace CSAlumni
        SendGetRequest sendGet;
        SendDeleteRequest sendDelete;
        SendPostRequest sendPost;
+       List<Broadcast> broadcastList;
+       List<User> userList;
         public MainWindow()
         {
+           
             InitializeComponent();
 
         }
         private void buildUserListView(List<User> users) {
+            this.userList = users;
             foreach(User user in users){
                 ListViewItem item = new ListViewItem();
                 item.Text = user.Surname;
@@ -38,25 +44,34 @@ namespace CSAlumni
                 listView1.Items.Add(item);
             }
         }
+        private void buildBroadcastListView(List<Broadcast> broadcasts) {
+            this.broadcastList = broadcasts;
+            StringBuilder sb = new StringBuilder();
+            if (broadcasts!=null) {
+                foreach (Broadcast broadcast in broadcasts) {
+                    ListViewItem item = new ListViewItem();
+                    foreach (Feed feed in broadcast.Feeds) {
+                        sb.Append(feed.name + ",");
+                    }
+                    item.Text=sb.ToString();
+                    sb.Clear();
+                    item.SubItems.Add(broadcast.content);
+                    item.SubItems.Add(""+broadcast.id);
+                    listView2.Items.Add(item);
+                  }
+                }
+            }
+            
+        
         private void MainWindow_Load(object sender, EventArgs e)
         {
               sendPatch = new SendPatchRequest(username, password, url);
               sendPost = new SendPostRequest(username, password, url);
-              sendGet = new SendGetRequest(username, password, url);
+             sendGet = new SendGetRequest(username, password, url);
               sendDelete = new SendDeleteRequest(username, password, url);
 
               buildUserListView(sendGet.getUserList());
-            //  User user = new User("Krzyso", "Ilkedsow", "078271534507", 2013, false, "a1rom11zordaschris@hotmail.com");
-             // Feeds feeds = new Feeds(1, 0, 0, 0, 1, "cs-alumni");
-             // Broadcast broadcast = new Broadcast("Some22Content22", feeds);
-            //  get.getBroadcastList("http://178.62.230.34/");
-           //   delete.fetchCSRF(chrisUser);
-            //  delete.delete("http://192.168.0.19:3000/broadcasts/24.json");
-            //  sendPost.addNew(broadcastUrl,broadcast);
-         // get.getUserList();
-       //  patchRequest.patchUser(chrisUser, user);
-           //sendPost.addNew(url, user);
-        //    sendPost.addNewBroadcast("http://178.62.230.34:3000/broadcasts.json", broadcast);
+              buildBroadcastListView(sendGet.getBroadcastList());
 
         }
 
@@ -67,7 +82,24 @@ namespace CSAlumni
                 e.Cancel = true;
             } 
         }
+
+        private void listView2_MouseClick(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Right) {
+                if (listView2.FocusedItem.Bounds.Contains(e.Location) == true) {
+                    popupMenuBroadcast.Show(Cursor.Position);
+                }
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
+            ListViewItem item = listView2.SelectedItems[0];
+            int id = Convert.ToInt32(item.SubItems[2].Text);
+            
+            if (item != null) {
+                sendDelete.delete("broadcasts", id);
+                listView2.Items.Remove(item);
+               
+            }
+        }
     }
 }
-//ahMclX3MRwtlZcxZWkcVHbrFM5vNamhVX+p1qbPvgsM=
-//ahMclX3MRwtlZcxZWkcVHbrFM5vNamhVX+p1qbPvgsM=

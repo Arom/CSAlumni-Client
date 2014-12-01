@@ -14,7 +14,8 @@ namespace CSAlumni
        public int Grad_year { get; set; }
        public Boolean Jobs { get; set; }
        public string Email { get; set; }
-      public string Url {  set;  get; }
+       public string Url { get; set; }
+
 
        public User(string firstname, string surname, string phone, int grad_year, Boolean jobs, string email)
        {

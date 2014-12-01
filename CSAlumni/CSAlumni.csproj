@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Broadcast.cs" />
+    <Compile Include="Models\BroadcastToSend.cs" />
+    <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\Feeds.cs" />
     <Compile Include="Utils\StringHelper.cs" />
     <Compile Include="Views\LoginForm.cs">

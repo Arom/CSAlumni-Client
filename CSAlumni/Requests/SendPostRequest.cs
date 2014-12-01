@@ -9,6 +9,7 @@ using System.IO;
 using Newtonsoft.Json;
 using CSAlumni.Utils;
 using System.Diagnostics;
+using CSAlumni.Models;
 
 namespace CSAlumni
 {
@@ -29,7 +30,7 @@ namespace CSAlumni
         //TODO : Auth, normal user not allowed 
         public void addNew(Object myObject)
         {
-            if (myObject is Broadcast) {
+            if (myObject is BroadcastToSend) {
                 url = url + "/broadcasts.json";
             } else if (myObject is User) {
                 url = url + "/users.json";
@@ -41,6 +42,7 @@ namespace CSAlumni
             request.ContentType = "application/json";
             request.Method = "POST";
             string newObject = JsonConvert.SerializeObject(myObject).ToLower();
+            Trace.WriteLine(newObject);
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(newObject);
             Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);

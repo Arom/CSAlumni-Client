@@ -28,16 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnCreateUser = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.btnCreateBroadcast = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabBroadcasts = new System.Windows.Forms.TabPage();
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabUsers = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
             this.Surname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GradYear = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.popupMenuBroadcast = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabControl1.SuspendLayout();
+            this.tabBroadcasts.SuspendLayout();
+            this.tabUsers.SuspendLayout();
+            this.popupMenuBroadcast.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCreateUser
@@ -85,6 +99,63 @@
             this.btnCreateBroadcast.Text = "Create Broadcast";
             this.btnCreateBroadcast.UseVisualStyleBackColor = true;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabBroadcasts);
+            this.tabControl1.Controls.Add(this.tabUsers);
+            this.tabControl1.Location = new System.Drawing.Point(13, 3);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(582, 236);
+            this.tabControl1.TabIndex = 6;
+            // 
+            // tabBroadcasts
+            // 
+            this.tabBroadcasts.Controls.Add(this.listView2);
+            this.tabBroadcasts.Location = new System.Drawing.Point(4, 22);
+            this.tabBroadcasts.Name = "tabBroadcasts";
+            this.tabBroadcasts.Padding = new System.Windows.Forms.Padding(3);
+            this.tabBroadcasts.Size = new System.Drawing.Size(574, 210);
+            this.tabBroadcasts.TabIndex = 0;
+            this.tabBroadcasts.Text = "Broadcasts";
+            this.tabBroadcasts.UseVisualStyleBackColor = true;
+            // 
+            // listView2
+            // 
+            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
+            this.columnHeader6,
+            this.id});
+            this.listView2.FullRowSelect = true;
+            this.listView2.Location = new System.Drawing.Point(-4, 0);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(582, 210);
+            this.listView2.TabIndex = 9;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.Details;
+            this.listView2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView2_MouseClick);
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Feeds";
+            this.columnHeader5.Width = 193;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Content";
+            this.columnHeader6.Width = 382;
+            // 
+            // tabUsers
+            // 
+            this.tabUsers.Controls.Add(this.listView1);
+            this.tabUsers.Location = new System.Drawing.Point(4, 22);
+            this.tabUsers.Name = "tabUsers";
+            this.tabUsers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabUsers.Size = new System.Drawing.Size(574, 210);
+            this.tabUsers.TabIndex = 1;
+            this.tabUsers.Text = "Users";
+            this.tabUsers.UseVisualStyleBackColor = true;
+            // 
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -92,10 +163,10 @@
             this.FirstName,
             this.Email,
             this.GradYear});
-            this.listView1.Location = new System.Drawing.Point(169, 21);
+            this.listView1.Location = new System.Drawing.Point(-4, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(248, 149);
-            this.listView1.TabIndex = 5;
+            this.listView1.Size = new System.Drawing.Size(582, 210);
+            this.listView1.TabIndex = 8;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
@@ -115,12 +186,31 @@
             // 
             this.GradYear.Text = "Grad Year";
             // 
+            // popupMenuBroadcast
+            // 
+            this.popupMenuBroadcast.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.popupMenuBroadcast.Name = "popupMenuBroadcast";
+            this.popupMenuBroadcast.Size = new System.Drawing.Size(163, 26);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.deleteToolStripMenuItem.Text = "Delete Broadcast";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // id
+            // 
+            this.id.Text = "#";
+            this.id.Width = 0;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(607, 273);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCreateBroadcast);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -130,6 +220,10 @@
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.tabControl1.ResumeLayout(false);
+            this.tabBroadcasts.ResumeLayout(false);
+            this.tabUsers.ResumeLayout(false);
+            this.popupMenuBroadcast.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -141,11 +235,20 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button btnCreateBroadcast;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabBroadcasts;
+        private System.Windows.Forms.TabPage tabUsers;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader Surname;
         private System.Windows.Forms.ColumnHeader FirstName;
         private System.Windows.Forms.ColumnHeader Email;
         private System.Windows.Forms.ColumnHeader GradYear;
+        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ContextMenuStrip popupMenuBroadcast;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader id;
     }
 }
 

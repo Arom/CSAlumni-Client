@@ -25,17 +25,27 @@ namespace CSAlumni
             encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
         }
  
-        public void delete(string url)
-        {
-            WebRequest request = WebRequest.Create(url);
+        public void delete(string type, int id)
+        {            
+            Trace.WriteLine(type + " " + id);
+            Trace.WriteLine(url + type + "/" + id + ".json");
+            WebRequest request = WebRequest.Create(url + type + "/" + id + ".json");
             request.Headers.Add("Authorization", "Basic " + encoded);
-            request.Headers.Add("X-CSRF-Token", "ahMclX3MRwtlZcxZWkcVHbrFM5vNamhVX+p1qbPvgsM=");
-
             request.Method = "DELETE";
-            //try catch
-
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
+            //string remove = JsonConvert.SerializeObject(id);
+            string remove = "";
+            byte[] toSend = System.Text.Encoding.ASCII.GetBytes(remove);
+            Stream os = request.GetRequestStream();
+            os.Write(toSend, 0, toSend.Length);
+            WebResponse response;
+            try {
+                response = request.GetResponse();
+            } catch (WebException ex) {
+                response = ex.Response;
+            }
+            using (StreamReader sr = new StreamReader(response.GetResponseStream())) {
+                Trace.WriteLine(sr.ReadToEnd().Trim());
+            }
         }
     }
 }
