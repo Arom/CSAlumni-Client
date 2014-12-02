@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSAlumni
 {
-    class User
+ public   class User
     {
        public string Surname { get; set; }
       public  string Firstname { get; set; }
@@ -15,9 +15,10 @@ namespace CSAlumni
        public Boolean Jobs { get; set; }
        public string Email { get; set; }
        public string Url { get; set; }
+       public int id { get; set; }
 
 
-       public User(string firstname, string surname, string phone, int grad_year, Boolean jobs, string email)
+       public User(string firstname, string surname, string phone, int grad_year, Boolean jobs, string email, int id)
        {
            this.Firstname = firstname;
            this.Surname = surname;
@@ -25,7 +26,17 @@ namespace CSAlumni
            this.Grad_year = grad_year;
            this.Jobs = jobs;
            this.Email = email;
+           this.id = id;
            
        }
+       //public User(string firstname, string surname, string phone, int grad_year, Boolean jobs, string email) {
+       //    this.Firstname = firstname;
+       //    this.Surname = surname;
+       //    this.Phone = phone;
+       //    this.Grad_year = grad_year;
+       //    this.Jobs = jobs;
+       //    this.Email = email;
+
+       //}
     }
 }

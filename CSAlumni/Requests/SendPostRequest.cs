@@ -1,43 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.IO;
-using Newtonsoft.Json;
+﻿using CSAlumni.Models;
 using CSAlumni.Utils;
+using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
-using CSAlumni.Models;
+using System.IO;
+using System.Net;
 
-namespace CSAlumni
-{
-    class SendPostRequest
-    {
-        string password;
-        string username;
-        string encoded;
-        string url;
-        public SendPostRequest(string username, string password, string url)
-        {
+namespace CSAlumni {
+
+    public class SendPostRequest {
+        private string encoded;
+        private string password;
+        private string url;
+        private string username;
+
+        public SendPostRequest(string username, string password, string url) {
             this.username = username;
             this.password = password;
             this.url = url;
             encoded = StringHelper.EncodeString(username, password);
         }
-       
-        //TODO : Auth, normal user not allowed 
-        public void addNew(Object myObject)
-        {
+
+        //TODO : Auth, normal user not allowed
+        public void addNew(Object myObject) {
+            HttpWebRequest request = null;
             if (myObject is BroadcastToSend) {
-                url = url + "/broadcasts.json";
+               request =  (HttpWebRequest)WebRequest.Create(url + "/broadcasts.json");
             } else if (myObject is User) {
-                url = url + "/users.json";
+                request = (HttpWebRequest)WebRequest.Create(url + "/users.json");
             } else {
                 url = null;
             }
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";
             request.Method = "POST";
@@ -47,21 +40,14 @@ namespace CSAlumni
             Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
             WebResponse response;
-            try
-            {
+            try {
                 response = request.GetResponse();
-            }
-            catch (WebException ex)
-            {
+            } catch (WebException ex) {
                 response = ex.Response;
             }
-            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-            {
-                Trace.WriteLine(sr.ReadToEnd().Trim());
+            using (StreamReader sr = new StreamReader(response.GetResponseStream())) {
+             //   Trace.WriteLine(sr.ReadToEnd().Trim());
             }
-          
         }
     }
-
-
 }

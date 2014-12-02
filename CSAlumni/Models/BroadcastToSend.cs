@@ -8,10 +8,12 @@ namespace CSAlumni.Models {
     class BroadcastToSend {
         public string Content { get; set; }
         public Feeds Feeds { get; set; }
-
+        //public List<Object> Feeds { get; set; }
         public BroadcastToSend(string content, Feeds feed) {
             this.Content = content;
             this.Feeds = feed;
         }
+
+ 
     }
 }

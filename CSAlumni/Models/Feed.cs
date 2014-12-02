@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSAlumni
 {
-    class Feed
+   public class Feed
     {
         public string name { get; set; }
         public Feed(string name) {

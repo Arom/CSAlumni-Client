@@ -53,6 +53,18 @@
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\Feeds.cs" />
     <Compile Include="Utils\StringHelper.cs" />
+    <Compile Include="Views\CreateBroadcastForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateBroadcastForm.Designer.cs">
+      <DependentUpon>CreateBroadcastForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateUserForm.Designer.cs">
+      <DependentUpon>CreateUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +84,12 @@
     <Compile Include="Requests\SendPatchRequest.cs" />
     <Compile Include="Requests\SendPostRequest.cs" />
     <Compile Include="Models\User.cs" />
+    <EmbeddedResource Include="Views\CreateBroadcastForm.resx">
+      <DependentUpon>CreateBroadcastForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateUserForm.resx">
+      <DependentUpon>CreateUserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -14,7 +14,7 @@ namespace CSAlumni.Models {
         public int Rss { get; set; }
         public int Atom { get; set; }
         public int Email { get; set; }
-
+         
         public Feeds(int twitter, int facebook, int rss, int atom, int email, string alumni_email)
         {
             this.Twitter = twitter;
@@ -24,23 +24,24 @@ namespace CSAlumni.Models {
             this.Email = email;
             this.Alumni_email = alumni_email;
         }
-        public Feeds(string twitter, string facebook, string rss, string atom, string email) {
-            if (!StringHelper.isEmpty(twitter)) {
-                this.Twitter = 1;
-            }
-            if (!StringHelper.isEmpty(facebook)) {
-                this.Facebook = 1;
-            }
-            if(!StringHelper.isEmpty(rss)){
-                this.Rss =1;
-            }
-            if(!StringHelper.isEmpty(atom)){
-                this.Atom = 1;
-            }
-            if(!StringHelper.isEmpty(email)){
-                this.Email = 1;
-            }
-           
+
+        public bool ShouldSerializeFacebook() {
+            return (Facebook != 0);
         }
+        public bool ShouldSerializeRss() {
+            return (Rss != 0);
+        }
+        public  bool ShouldSerializeAtom(){
+            return(Atom!=0);
+        }
+        public bool ShouldSerializeTwitter() {
+            return (Twitter != 0);
+        }
+        public bool ShouldSerializeEmail() {
+            return (Email != 0);
+        }
+        
+   
+        
     }
 }

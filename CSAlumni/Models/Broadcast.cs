@@ -8,7 +8,7 @@ using CSAlumni.Models;
 
 namespace CSAlumni
 {
-    class Broadcast
+   public class Broadcast
     {
         public string content { get; set; }
         public List<Feed> Feeds { get; set; }
