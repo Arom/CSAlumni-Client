@@ -59,6 +59,18 @@
     <Compile Include="Views\CreateBroadcastForm.Designer.cs">
       <DependentUpon>CreateBroadcastForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\DisplayBroadcastForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DisplayBroadcastForm.Designer.cs">
+      <DependentUpon>DisplayBroadcastForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UpdateUserForm.Designer.cs">
+      <DependentUpon>UpdateUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +99,12 @@
     <EmbeddedResource Include="Views\CreateBroadcastForm.resx">
       <DependentUpon>CreateBroadcastForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\DisplayBroadcastForm.resx">
+      <DependentUpon>DisplayBroadcastForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UpdateUserForm.resx">
+      <DependentUpon>UpdateUserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateUserForm.resx">
       <DependentUpon>CreateUserForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,6 +122,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -118,6 +137,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\images\fb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\images\rss.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\images\twitter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\images\email.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

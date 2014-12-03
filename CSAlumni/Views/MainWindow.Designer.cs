@@ -30,29 +30,30 @@
         {
             this.components = new System.ComponentModel.Container();
             this.btnCreateUser = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.btnCreateBroadcast = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabBroadcasts = new System.Windows.Forms.TabPage();
+            this.btnUpdateBroadcasts = new System.Windows.Forms.Button();
             this.listView2 = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabUsers = new System.Windows.Forms.TabPage();
+            this.btnUpdateUser = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.Surname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Phone = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GradYear = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.user_id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Jobs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.popupMenuBroadcast = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.popupMenuUser = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnUpdateUser = new System.Windows.Forms.Button();
-            this.btnUpdateBroadcasts = new System.Windows.Forms.Button();
+            this.displayBroadcastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabBroadcasts.SuspendLayout();
             this.tabUsers.SuspendLayout();
@@ -62,46 +63,19 @@
             // 
             // btnCreateUser
             // 
-            this.btnCreateUser.Location = new System.Drawing.Point(3, 235);
+            this.btnCreateUser.Location = new System.Drawing.Point(317, 241);
             this.btnCreateUser.Name = "btnCreateUser";
-            this.btnCreateUser.Size = new System.Drawing.Size(92, 39);
+            this.btnCreateUser.Size = new System.Drawing.Size(278, 39);
             this.btnCreateUser.TabIndex = 0;
             this.btnCreateUser.Text = "Create User ";
             this.btnCreateUser.UseVisualStyleBackColor = true;
             this.btnCreateUser.Click += new System.EventHandler(this.btnCreateUser_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(475, 235);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(92, 39);
-            this.button2.TabIndex = 1;
-            this.button2.Text = " ";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(349, 235);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(92, 39);
-            this.button3.TabIndex = 2;
-            this.button3.Text = " ";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(226, 235);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(92, 39);
-            this.button4.TabIndex = 3;
-            this.button4.Text = " ";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // btnCreateBroadcast
             // 
-            this.btnCreateBroadcast.Location = new System.Drawing.Point(113, 235);
+            this.btnCreateBroadcast.Location = new System.Drawing.Point(12, 241);
             this.btnCreateBroadcast.Name = "btnCreateBroadcast";
-            this.btnCreateBroadcast.Size = new System.Drawing.Size(92, 39);
+            this.btnCreateBroadcast.Size = new System.Drawing.Size(299, 39);
             this.btnCreateBroadcast.TabIndex = 4;
             this.btnCreateBroadcast.Text = "Create Broadcast";
             this.btnCreateBroadcast.UseVisualStyleBackColor = true;
@@ -128,6 +102,16 @@
             this.tabBroadcasts.TabIndex = 0;
             this.tabBroadcasts.Text = "Broadcasts";
             this.tabBroadcasts.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateBroadcasts
+            // 
+            this.btnUpdateBroadcasts.Location = new System.Drawing.Point(445, 0);
+            this.btnUpdateBroadcasts.Name = "btnUpdateBroadcasts";
+            this.btnUpdateBroadcasts.Size = new System.Drawing.Size(129, 23);
+            this.btnUpdateBroadcasts.TabIndex = 10;
+            this.btnUpdateBroadcasts.Text = "Update Broadcast List";
+            this.btnUpdateBroadcasts.UseVisualStyleBackColor = true;
+            this.btnUpdateBroadcasts.Click += new System.EventHandler(this.btnUpdateBroadcasts_Click);
             // 
             // listView2
             // 
@@ -171,14 +155,26 @@
             this.tabUsers.Text = "Users";
             this.tabUsers.UseVisualStyleBackColor = true;
             // 
+            // btnUpdateUser
+            // 
+            this.btnUpdateUser.Location = new System.Drawing.Point(449, 0);
+            this.btnUpdateUser.Name = "btnUpdateUser";
+            this.btnUpdateUser.Size = new System.Drawing.Size(125, 24);
+            this.btnUpdateUser.TabIndex = 9;
+            this.btnUpdateUser.Text = "Update User List";
+            this.btnUpdateUser.UseVisualStyleBackColor = true;
+            this.btnUpdateUser.Click += new System.EventHandler(this.btnUpdateUser_Click);
+            // 
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Surname,
             this.FirstName,
             this.Email,
+            this.Phone,
             this.GradYear,
-            this.user_id});
+            this.user_id,
+            this.Jobs});
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(-4, 0);
             this.listView1.MultiSelect = false;
@@ -192,44 +188,66 @@
             // Surname
             // 
             this.Surname.Text = "Surname";
+            this.Surname.Width = 90;
             // 
             // FirstName
             // 
             this.FirstName.Text = "First Name";
+            this.FirstName.Width = 90;
             // 
             // Email
             // 
             this.Email.Text = "E-mail";
+            this.Email.Width = 90;
+            // 
+            // Phone
+            // 
+            this.Phone.Text = "Phone";
             // 
             // GradYear
             // 
+            this.GradYear.DisplayIndex = 5;
             this.GradYear.Text = "Grad Year";
             // 
             // user_id
             // 
+            this.user_id.DisplayIndex = 4;
             this.user_id.Text = "#";
             this.user_id.Width = 0;
+            // 
+            // Jobs
+            // 
+            this.Jobs.Text = "Jobs";
             // 
             // popupMenuBroadcast
             // 
             this.popupMenuBroadcast.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.displayBroadcastToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.popupMenuBroadcast.Name = "popupMenuBroadcast";
-            this.popupMenuBroadcast.Size = new System.Drawing.Size(163, 26);
+            this.popupMenuBroadcast.Size = new System.Drawing.Size(168, 70);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.deleteToolStripMenuItem.Text = "Delete Broadcast";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // popupMenuUser
             // 
             this.popupMenuUser.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
             this.deleteUserToolStripMenuItem});
             this.popupMenuUser.Name = "popupMenuUser";
-            this.popupMenuUser.Size = new System.Drawing.Size(134, 26);
+            this.popupMenuUser.Size = new System.Drawing.Size(134, 48);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.editToolStripMenuItem.Text = "Edit User";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteUserToolStripMenuItem
             // 
@@ -238,36 +256,20 @@
             this.deleteUserToolStripMenuItem.Text = "Delete User";
             this.deleteUserToolStripMenuItem.Click += new System.EventHandler(this.deleteUserToolStripMenuItem_Click);
             // 
-            // btnUpdateUser
+            // displayBroadcastToolStripMenuItem
             // 
-            this.btnUpdateUser.Location = new System.Drawing.Point(449, 0);
-            this.btnUpdateUser.Name = "btnUpdateUser";
-            this.btnUpdateUser.Size = new System.Drawing.Size(125, 26);
-            this.btnUpdateUser.TabIndex = 9;
-            this.btnUpdateUser.Text = "Update User List";
-            this.btnUpdateUser.UseVisualStyleBackColor = true;
-            this.btnUpdateUser.Click += new System.EventHandler(this.btnUpdateUser_Click);
-            // 
-            // btnUpdateBroadcasts
-            // 
-            this.btnUpdateBroadcasts.Location = new System.Drawing.Point(445, 0);
-            this.btnUpdateBroadcasts.Name = "btnUpdateBroadcasts";
-            this.btnUpdateBroadcasts.Size = new System.Drawing.Size(129, 26);
-            this.btnUpdateBroadcasts.TabIndex = 10;
-            this.btnUpdateBroadcasts.Text = "Update Broadcast List";
-            this.btnUpdateBroadcasts.UseVisualStyleBackColor = true;
-            this.btnUpdateBroadcasts.Click += new System.EventHandler(this.btnUpdateBroadcasts_Click);
+            this.displayBroadcastToolStripMenuItem.Name = "displayBroadcastToolStripMenuItem";
+            this.displayBroadcastToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.displayBroadcastToolStripMenuItem.Text = "Display Broadcast";
+            this.displayBroadcastToolStripMenuItem.Click += new System.EventHandler(this.displayBroadcastToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(607, 273);
+            this.ClientSize = new System.Drawing.Size(607, 287);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCreateBroadcast);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.btnCreateUser);
             this.Name = "MainWindow";
             this.Text = "CSAlumni";
@@ -285,9 +287,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnCreateUser;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button btnCreateBroadcast;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabBroadcasts;
@@ -308,6 +307,10 @@
         private System.Windows.Forms.ColumnHeader user_id;
         private System.Windows.Forms.Button btnUpdateUser;
         private System.Windows.Forms.Button btnUpdateBroadcasts;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader Phone;
+        private System.Windows.Forms.ColumnHeader Jobs;
+        private System.Windows.Forms.ToolStripMenuItem displayBroadcastToolStripMenuItem;
     }
 }
 

@@ -11,14 +11,13 @@ namespace CSAlumni {
 
         public SendGetRequest sendGet;
         public SendPostRequest sendPost;
+        public SendPatchRequest sendPatch;
 
         //178.62.230.34
         public string url = "http://178.62.230.34/";
-
         public string username;
         private List<Broadcast> broadcastList;
         private SendDeleteRequest sendDelete;
-        private SendPatchRequest sendPatch;
         private List<User> userList;
 
         public MainWindow(string username, string password, SendGetRequest sendGet) {
@@ -49,7 +48,7 @@ namespace CSAlumni {
                 foreach (Broadcast broadcast in broadcasts) {
                     ListViewItem item = new ListViewItem();
                     foreach (Feed feed in broadcast.Feeds) {
-                        sb.Append(feed.name + ",");
+                        sb.Append(feed.name + " ");
                     }
                     item.Text = sb.ToString();
                     sb.Clear();
@@ -65,10 +64,12 @@ namespace CSAlumni {
             foreach (User user in users) {
                 ListViewItem item = new ListViewItem();
                 item.Text = user.Surname;
-                item.SubItems.Add(user.Firstname);
+                item.SubItems.Add(user.Firstname);  
                 item.SubItems.Add(user.Email);
+                item.SubItems.Add(user.Phone);
                 item.SubItems.Add("" + user.Grad_year);
                 item.SubItems.Add("" + user.id);
+                item.SubItems.Add(user.Jobs.ToString());
                 listView1.Items.Add(item);
             }
         }
@@ -85,7 +86,7 @@ namespace CSAlumni {
 
         private void deleteUserToolStripMenuItem_Click(object sender, EventArgs e) {
             ListViewItem item = listView1.SelectedItems[0];
-            int id = Convert.ToInt32(item.SubItems[4].Text);
+            int id = Convert.ToInt32(item.SubItems[5].Text);
             if (item != null) {
                 sendDelete.delete("users", id);
                 listView1.Items.Remove(item);
@@ -112,7 +113,7 @@ namespace CSAlumni {
             DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo);
             if (result == DialogResult.No) {
                 e.Cancel = true;
-            }
+            } 
         }
 
         private void MainWindow_Load(object sender, EventArgs e) {
@@ -127,6 +128,43 @@ namespace CSAlumni {
 
         private void btnCreateBroadcast_Click(object sender, EventArgs e) {
             new CreateBroadcastForm(sendPost).Show();
+        }
+        private User findUser(int id) {
+            User FoundUser = null;
+            foreach (User user in userList) {
+                if (user.id == id) {
+                    FoundUser = user;
+                    break;
+                }
+            }
+            return FoundUser;
+        }
+
+        private Broadcast findBroadcast(int id) {
+            Broadcast foundBroadcast = null;
+            foreach (Broadcast broadcast in broadcastList) {
+                if (broadcast.id == id) {
+                    foundBroadcast = broadcast;
+                }
+            }
+            return foundBroadcast;
+        }
+        private void editToolStripMenuItem_Click(object sender, EventArgs e) {
+            ListViewItem item = listView1.SelectedItems[0];
+            int id = Convert.ToInt32(item.SubItems[5].Text);
+
+            if (item != null) {
+                new UpdateUserForm(sendPatch, findUser(id)).Show();
+            }
+        }
+
+        private void displayBroadcastToolStripMenuItem_Click(object sender, EventArgs e) {
+     
+            ListViewItem item = listView2.SelectedItems[0];
+            int id = Convert.ToInt32(item.SubItems[2].Text);
+            if (item != null) {
+                new DisplayBroadcastForm(findBroadcast(id)).Show();
+            }
         }
     }
 }

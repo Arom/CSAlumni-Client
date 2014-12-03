@@ -11,7 +11,7 @@ using CSAlumni.Utils;
 using System.Diagnostics;
 namespace CSAlumni
 {
-    class SendPatchRequest
+    public class SendPatchRequest
     {
         string password;
         string username;
@@ -26,14 +26,14 @@ namespace CSAlumni
             encoded = StringHelper.EncodeString(username, password);
         }
 
-        public void patchUser(string url, User user)
+        public void patchUser( User user)
         {
            
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url+"/users/"+user.id+".json");
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";
             request.Method = "PATCH";
-            string updateUser = JsonConvert.SerializeObject(user);
+            string updateUser = JsonConvert.SerializeObject(user).ToLower();
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(updateUser);
             Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
