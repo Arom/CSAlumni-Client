@@ -1,4 +1,5 @@
-﻿using CSAlumni.Views;
+﻿using CSAlumni.Utils;
+using CSAlumni.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,7 @@ namespace CSAlumni {
         //178.62.230.34
         public string url = "http://178.62.230.34/";
         public string username;
+       // private Finder Finder;
         private List<Broadcast> broadcastList;
         private SendDeleteRequest sendDelete;
         private List<User> userList;
@@ -129,32 +131,13 @@ namespace CSAlumni {
         private void btnCreateBroadcast_Click(object sender, EventArgs e) {
             new CreateBroadcastForm(sendPost).Show();
         }
-        private User findUser(int id) {
-            User FoundUser = null;
-            foreach (User user in userList) {
-                if (user.id == id) {
-                    FoundUser = user;
-                    break;
-                }
-            }
-            return FoundUser;
-        }
-
-        private Broadcast findBroadcast(int id) {
-            Broadcast foundBroadcast = null;
-            foreach (Broadcast broadcast in broadcastList) {
-                if (broadcast.id == id) {
-                    foundBroadcast = broadcast;
-                }
-            }
-            return foundBroadcast;
-        }
+     
         private void editToolStripMenuItem_Click(object sender, EventArgs e) {
             ListViewItem item = listView1.SelectedItems[0];
             int id = Convert.ToInt32(item.SubItems[5].Text);
 
             if (item != null) {
-                new UpdateUserForm(sendPatch, findUser(id)).Show();
+                new UpdateUserForm(sendPatch, Finder.findUserById(id, userList)).Show();
             }
         }
 
@@ -163,7 +146,7 @@ namespace CSAlumni {
             ListViewItem item = listView2.SelectedItems[0];
             int id = Convert.ToInt32(item.SubItems[2].Text);
             if (item != null) {
-                new DisplayBroadcastForm(findBroadcast(id)).Show();
+                new DisplayBroadcastForm(Finder.findBroadcastById(id, broadcastList)).Show();
             }
         }
     }

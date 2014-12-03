@@ -13,6 +13,7 @@ namespace CSAlumni
 {
     public class SendPatchRequest
     {
+        private HttpWebResponse Response;
         string password;
         string username;
         string encoded;
@@ -26,7 +27,7 @@ namespace CSAlumni
             encoded = StringHelper.EncodeString(username, password);
         }
 
-        public void patchUser( User user)
+        public int patchUser( User user)
         {
            
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url+"/users/"+user.id+".json");
@@ -37,19 +38,9 @@ namespace CSAlumni
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(updateUser);
             Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
-            WebResponse response;
-            try
-            {
-                response = request.GetResponse();
-            }
-            catch (WebException ex)
-            {
-                response = ex.Response;
-            }
-            using (StreamReader sr = new StreamReader(response.GetResponseStream())) 
-            {
-                Trace.WriteLine(sr.ReadToEnd().Trim());
-            }
+            Response = (HttpWebResponse)request.GetResponse();
+            Trace.WriteLine((int)Response.StatusCode);
+            return (int)Response.StatusCode;
         }
     }
 }

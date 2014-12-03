@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CSAlumni.Models {
-    class BroadcastToSend {
+   public class BroadcastToSend {
         public string Content { get; set; }
         public Feeds Feeds { get; set; }
         //public List<Object> Feeds { get; set; }

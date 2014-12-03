@@ -52,6 +52,7 @@
     <Compile Include="Models\BroadcastToSend.cs" />
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\Feeds.cs" />
+    <Compile Include="Utils\Finder.cs" />
     <Compile Include="Utils\StringHelper.cs" />
     <Compile Include="Views\CreateBroadcastForm.cs">
       <SubType>Form</SubType>

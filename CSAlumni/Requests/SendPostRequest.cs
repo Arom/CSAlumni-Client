@@ -9,6 +9,7 @@ using System.Net;
 namespace CSAlumni {
 
     public class SendPostRequest {
+        private HttpWebResponse response;
         private string encoded;
         private string password;
         private string url;
@@ -22,7 +23,7 @@ namespace CSAlumni {
         }
 
         //TODO : Auth, normal user not allowed
-        public void addNew(Object myObject) {
+        public int addNew(Object myObject) {
             HttpWebRequest request = null;
             if (myObject is BroadcastToSend) {
                request =  (HttpWebRequest)WebRequest.Create(url + "/broadcasts.json");
@@ -35,19 +36,15 @@ namespace CSAlumni {
             request.ContentType = "application/json";
             request.Method = "POST";
             string newObject = JsonConvert.SerializeObject(myObject).ToLower();
-            Trace.WriteLine(newObject);
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(newObject);
             Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
-            WebResponse response;
-            try {
-                response = request.GetResponse();
-            } catch (WebException ex) {
-                response = ex.Response;
-            }
-            using (StreamReader sr = new StreamReader(response.GetResponseStream())) {
-             //   Trace.WriteLine(sr.ReadToEnd().Trim());
-            }
+    
+                response = (HttpWebResponse)request.GetResponse();
+                Trace.WriteLine((int)response.StatusCode);
+            
+            return (int)response.StatusCode;
+          
         }
     }
 }

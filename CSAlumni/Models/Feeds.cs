@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CSAlumni.Models {
-    class Feeds {
+    public class Feeds {
 
         public string Alumni_email { get; set; }
         public int Twitter { get; set; }
