@@ -15,7 +15,7 @@ namespace CSAlumni {
         public SendPatchRequest sendPatch;
 
         //178.62.230.34
-        public string url = "http://178.62.230.34/";
+        public string url = "http://192.168.0.19:3000/";
         public string username;
        // private Finder Finder;
         private List<Broadcast> broadcastList;
@@ -70,7 +70,7 @@ namespace CSAlumni {
                 item.SubItems.Add(user.Email);
                 item.SubItems.Add(user.Phone);
                 item.SubItems.Add("" + user.Grad_year);
-                item.SubItems.Add("" + user.id);
+                item.SubItems.Add("" + user.Id);
                 item.SubItems.Add(user.Jobs.ToString());
                 listView1.Items.Add(item);
             }

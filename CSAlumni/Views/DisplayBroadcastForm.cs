@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSAlumni.Views {
+    /// <summary>
+    /// A simple form to display a selected Broadcast.
+    /// </summary>
     public partial class DisplayBroadcastForm : Form {
         public DisplayBroadcastForm(Broadcast broadcast) {
             InitializeComponent();

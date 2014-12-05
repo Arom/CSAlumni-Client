@@ -5,26 +5,23 @@ namespace CSAlumni.Utils {
     public static class StringHelper {
 
         /// <summary>
-        /// Metoda ktora sklada EncodedString Uzywa extension, ktory mozna zawolac na kazdej
-        /// instancji stringa
+        /// Returns the encoded string for authentication purposes. 
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
         public static string EncodeString(string username, string password) {
             return String.Format("{0}:{1}", username, password).EncodeString();
         }
 
         /// <summary>
-        /// Metoda rozszerzajaca obiekt String (dziala na instancjach, w C# nie ma statycznych
-        /// Extensions -&gt; moze beda w 6.0)
+        /// Returns the encoded string for authentication purposes. 
         /// </summary>
-        /// <param name="stringToEncode"></param>
-        /// <returns></returns>
         public static string EncodeString(this string stringToEncode) {
             return Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(stringToEncode));
         }
-
+        /// <summary>
+        /// Checkes wether a passed string is null or empty.
+        /// </summary>
+        /// <param name="s">String to be checked.</param>
+        /// <returns>String empty/null or not.</returns>
         public static Boolean isEmpty(string s) {
             if (String.IsNullOrEmpty(s))
                 return true;
