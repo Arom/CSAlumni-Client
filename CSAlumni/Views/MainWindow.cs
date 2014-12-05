@@ -3,6 +3,7 @@ using CSAlumni.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CSAlumni {
@@ -15,7 +16,7 @@ namespace CSAlumni {
         public SendPatchRequest sendPatch;
 
         //178.62.230.34
-        public string url = "http://192.168.0.19:3000/";
+        public string url = "http://178.62.230.34/";
         public string username;
        // private Finder Finder;
         private List<Broadcast> broadcastList;
@@ -137,7 +138,7 @@ namespace CSAlumni {
             int id = Convert.ToInt32(item.SubItems[5].Text);
 
             if (item != null) {
-                new UpdateUserForm(sendPatch, Finder.findUserById(id, userList)).Show();
+                new UpdateUserForm(sendPatch, sendDelete, Finder.findUserById(id, userList)).Show();
             }
         }
 
@@ -148,6 +149,43 @@ namespace CSAlumni {
             if (item != null) {
                 new DisplayBroadcastForm(Finder.findBroadcastById(id, broadcastList)).Show();
             }
+        }
+
+        private void btnFindUser_Click(object sender, EventArgs e) {
+            User foundUser = null;
+            string searchTerm = null;
+            StringBuilder sb = new StringBuilder();
+            if (!StringHelper.isEmpty(txtSearch.Text)) {
+               searchTerm = txtSearch.Text;
+               if (radioEmail.Checked) {
+                   foundUser = Finder.findUserByEmail(searchTerm, userList);
+               } else if (radioFirstname.Checked) {
+                   foundUser = Finder.findUserByFirstname(searchTerm, userList);
+               } else if (radioGradYear.Checked) {
+                   if (!Regex.IsMatch(txtSearch.Text, @"^\d+$")) {
+                       sb.Append("Grad Year search term needs to be a number. \n");
+                   } else {
+                       int gradYear = Convert.ToInt32(txtSearch.Text);
+                       foundUser = Finder.findUserByGradYear(gradYear, userList);
+                   }
+               } else if (radioPhone.Checked) {
+                   foundUser = Finder.findUserByPhone(searchTerm, userList);
+               } else if (radioSurname.Checked) {
+                   foundUser = Finder.findUserBySurname(searchTerm, userList);
+               }
+               if (foundUser != null) {
+                   new UpdateUserForm(sendPatch,sendDelete, foundUser).Show();
+               } else {
+                   sb.Append("User not found.");
+               }
+            } else {
+                sb.Append("I need a search term.");
+            }
+            if (!StringHelper.isEmpty(sb.ToString())) {
+                MessageBox.Show(sb.ToString(), "Validation errors");
+            }
+           
+
         }
     }
 }

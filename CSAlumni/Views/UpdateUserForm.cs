@@ -13,11 +13,13 @@ using System.Windows.Forms;
 namespace CSAlumni.Views {
     public partial class UpdateUserForm : Form {
         public SendPatchRequest SendPatch;
+        public SendDeleteRequest SendDelete;
         public ListViewItem Item;
         private User User;
-        public UpdateUserForm(SendPatchRequest sendPatch, User user) {
+        public UpdateUserForm(SendPatchRequest sendPatch, SendDeleteRequest sendDelete, User user) {
             InitializeComponent();
             this.SendPatch = sendPatch;
+            this.SendDelete = sendDelete;
             this.User = user;
             txtFirstName.Text = user.Firstname;
             txtSurname.Text = user.Surname;
@@ -58,6 +60,11 @@ namespace CSAlumni.Views {
 
             }
             
+        }
+
+        private void btnDeleteUser_Click(object sender, EventArgs e) {
+            SendDelete.delete("users", User.Id);
+            this.Dispose(true);
         }
     }
 }

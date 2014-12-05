@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Threading;
 
 namespace CSAlumni {
     /// <summary>
@@ -28,14 +29,17 @@ namespace CSAlumni {
        /// <param name="id">The ID of the object to be deleted. </param>
        /// <returns>Reponse status code. Excepted 204 for successful request.</returns>
         public int delete(string type, int id) {
-            WebRequest request = WebRequest.Create(url + type + "/" + id + ".json");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + type + "/" + id + ".json");
             request.Headers.Add("Authorization", "Basic " + encoded);
-            request.Method = "DELETE";
+            request.Method = "DELETE";             
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes("");
             Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
             Response = (HttpWebResponse)request.GetResponse();
-            return (int)Response.StatusCode;
+            Response.Close();
+
+           return (int)Response.StatusCode;
+           // return 204;
         }
     }
 }

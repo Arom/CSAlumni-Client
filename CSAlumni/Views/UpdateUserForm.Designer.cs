@@ -36,6 +36,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.chkJobs = new System.Windows.Forms.CheckBox();
             this.btnUpdateUser = new System.Windows.Forms.Button();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -138,7 +139,7 @@
             // 
             // btnUpdateUser
             // 
-            this.btnUpdateUser.Location = new System.Drawing.Point(50, 197);
+            this.btnUpdateUser.Location = new System.Drawing.Point(60, 176);
             this.btnUpdateUser.Name = "btnUpdateUser";
             this.btnUpdateUser.Size = new System.Drawing.Size(162, 39);
             this.btnUpdateUser.TabIndex = 7;
@@ -146,11 +147,22 @@
             this.btnUpdateUser.UseVisualStyleBackColor = true;
             this.btnUpdateUser.Click += new System.EventHandler(this.btnUpdateUser_Click);
             // 
-            // CreateUserForm
+            // btnDeleteUser
+            // 
+            this.btnDeleteUser.Location = new System.Drawing.Point(60, 221);
+            this.btnDeleteUser.Name = "btnDeleteUser";
+            this.btnDeleteUser.Size = new System.Drawing.Size(162, 39);
+            this.btnDeleteUser.TabIndex = 14;
+            this.btnDeleteUser.Text = "Delete User";
+            this.btnDeleteUser.UseVisualStyleBackColor = true;
+            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click);
+            // 
+            // UpdateUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(270, 260);
+            this.Controls.Add(this.btnDeleteUser);
             this.Controls.Add(this.btnUpdateUser);
             this.Controls.Add(this.chkJobs);
             this.Controls.Add(this.label9);
@@ -164,8 +176,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Name = "CreateUserForm";
-            this.Text = "Create New User";
+            this.Name = "UpdateUserForm";
+            this.Text = "Edit User";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,5 +198,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox chkJobs;
         private System.Windows.Forms.Button btnUpdateUser;
+        private System.Windows.Forms.Button btnDeleteUser;
     }
 }

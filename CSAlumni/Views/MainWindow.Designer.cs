@@ -49,16 +49,25 @@
             this.user_id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Jobs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.popupMenuBroadcast = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.displayBroadcastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.popupMenuUser = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.displayBroadcastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnFindUser = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioFirstname = new System.Windows.Forms.RadioButton();
+            this.radioSurname = new System.Windows.Forms.RadioButton();
+            this.radioGradYear = new System.Windows.Forms.RadioButton();
+            this.radioPhone = new System.Windows.Forms.RadioButton();
+            this.radioEmail = new System.Windows.Forms.RadioButton();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabBroadcasts.SuspendLayout();
             this.tabUsers.SuspendLayout();
             this.popupMenuBroadcast.SuspendLayout();
             this.popupMenuUser.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCreateUser
@@ -225,7 +234,14 @@
             this.displayBroadcastToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.popupMenuBroadcast.Name = "popupMenuBroadcast";
-            this.popupMenuBroadcast.Size = new System.Drawing.Size(168, 70);
+            this.popupMenuBroadcast.Size = new System.Drawing.Size(168, 48);
+            // 
+            // displayBroadcastToolStripMenuItem
+            // 
+            this.displayBroadcastToolStripMenuItem.Name = "displayBroadcastToolStripMenuItem";
+            this.displayBroadcastToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.displayBroadcastToolStripMenuItem.Text = "Display Broadcast";
+            this.displayBroadcastToolStripMenuItem.Click += new System.EventHandler(this.displayBroadcastToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
@@ -256,18 +272,101 @@
             this.deleteUserToolStripMenuItem.Text = "Delete User";
             this.deleteUserToolStripMenuItem.Click += new System.EventHandler(this.deleteUserToolStripMenuItem_Click);
             // 
-            // displayBroadcastToolStripMenuItem
+            // btnFindUser
             // 
-            this.displayBroadcastToolStripMenuItem.Name = "displayBroadcastToolStripMenuItem";
-            this.displayBroadcastToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.displayBroadcastToolStripMenuItem.Text = "Display Broadcast";
-            this.displayBroadcastToolStripMenuItem.Click += new System.EventHandler(this.displayBroadcastToolStripMenuItem_Click);
+            this.btnFindUser.Location = new System.Drawing.Point(602, 241);
+            this.btnFindUser.Name = "btnFindUser";
+            this.btnFindUser.Size = new System.Drawing.Size(140, 39);
+            this.btnFindUser.TabIndex = 7;
+            this.btnFindUser.Text = "Find User";
+            this.btnFindUser.UseVisualStyleBackColor = true;
+            this.btnFindUser.Click += new System.EventHandler(this.btnFindUser_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioEmail);
+            this.groupBox1.Controls.Add(this.radioPhone);
+            this.groupBox1.Controls.Add(this.radioGradYear);
+            this.groupBox1.Controls.Add(this.radioSurname);
+            this.groupBox1.Controls.Add(this.radioFirstname);
+            this.groupBox1.Location = new System.Drawing.Point(602, 25);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(140, 137);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Find User By";
+            // 
+            // radioFirstname
+            // 
+            this.radioFirstname.AutoSize = true;
+            this.radioFirstname.Checked = true;
+            this.radioFirstname.Location = new System.Drawing.Point(6, 20);
+            this.radioFirstname.Name = "radioFirstname";
+            this.radioFirstname.Size = new System.Drawing.Size(70, 17);
+            this.radioFirstname.TabIndex = 0;
+            this.radioFirstname.TabStop = true;
+            this.radioFirstname.Text = "Firstname";
+            this.radioFirstname.UseVisualStyleBackColor = true;
+            // 
+            // radioSurname
+            // 
+            this.radioSurname.AutoSize = true;
+            this.radioSurname.Location = new System.Drawing.Point(6, 43);
+            this.radioSurname.Name = "radioSurname";
+            this.radioSurname.Size = new System.Drawing.Size(67, 17);
+            this.radioSurname.TabIndex = 1;
+            this.radioSurname.TabStop = true;
+            this.radioSurname.Text = "Surname";
+            this.radioSurname.UseVisualStyleBackColor = true;
+            // 
+            // radioGradYear
+            // 
+            this.radioGradYear.AutoSize = true;
+            this.radioGradYear.Location = new System.Drawing.Point(6, 66);
+            this.radioGradYear.Name = "radioGradYear";
+            this.radioGradYear.Size = new System.Drawing.Size(73, 17);
+            this.radioGradYear.TabIndex = 2;
+            this.radioGradYear.TabStop = true;
+            this.radioGradYear.Text = "Grad Year";
+            this.radioGradYear.UseVisualStyleBackColor = true;
+            // 
+            // radioPhone
+            // 
+            this.radioPhone.AutoSize = true;
+            this.radioPhone.Location = new System.Drawing.Point(6, 89);
+            this.radioPhone.Name = "radioPhone";
+            this.radioPhone.Size = new System.Drawing.Size(56, 17);
+            this.radioPhone.TabIndex = 3;
+            this.radioPhone.TabStop = true;
+            this.radioPhone.Text = "Phone";
+            this.radioPhone.UseVisualStyleBackColor = true;
+            // 
+            // radioEmail
+            // 
+            this.radioEmail.AutoSize = true;
+            this.radioEmail.Location = new System.Drawing.Point(6, 112);
+            this.radioEmail.Name = "radioEmail";
+            this.radioEmail.Size = new System.Drawing.Size(50, 17);
+            this.radioEmail.TabIndex = 4;
+            this.radioEmail.TabStop = true;
+            this.radioEmail.Text = "Email";
+            this.radioEmail.UseVisualStyleBackColor = true;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(602, 169);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(140, 20);
+            this.txtSearch.TabIndex = 9;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(607, 287);
+            this.ClientSize = new System.Drawing.Size(754, 287);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btnFindUser);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCreateBroadcast);
             this.Controls.Add(this.btnCreateUser);
@@ -280,7 +379,10 @@
             this.tabUsers.ResumeLayout(false);
             this.popupMenuBroadcast.ResumeLayout(false);
             this.popupMenuUser.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -311,6 +413,14 @@
         private System.Windows.Forms.ColumnHeader Phone;
         private System.Windows.Forms.ColumnHeader Jobs;
         private System.Windows.Forms.ToolStripMenuItem displayBroadcastToolStripMenuItem;
+        private System.Windows.Forms.Button btnFindUser;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioEmail;
+        private System.Windows.Forms.RadioButton radioPhone;
+        private System.Windows.Forms.RadioButton radioGradYear;
+        private System.Windows.Forms.RadioButton radioSurname;
+        private System.Windows.Forms.RadioButton radioFirstname;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }
 

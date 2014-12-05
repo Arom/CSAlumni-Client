@@ -51,7 +51,8 @@ namespace CSAlumni {
             os.Write(toSend, 0, toSend.Length);
             Response = (HttpWebResponse)request.GetResponse();
             Trace.WriteLine((int)Response.StatusCode);
-            
+            Response.Close();
+
             return (int)Response.StatusCode;
           
         }

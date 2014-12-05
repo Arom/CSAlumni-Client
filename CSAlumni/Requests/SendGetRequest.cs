@@ -43,6 +43,8 @@ namespace CSAlumni {
                 int responseCode = (int)Response.StatusCode;
                 Trace.WriteLine("Error occured, Status Code " + responseCode);
             }
+            Response.Close();
+
             return broadcasts;
         }
         /// <summary>
@@ -51,19 +53,23 @@ namespace CSAlumni {
         /// <returns>List<User> object containing current broadcasts.</returns>
         public List<User> getUserList() {
             List<User> users = null;
-            WebRequest request = WebRequest.Create(url + "/users.json?per_page=200");
+            WebRequest request = WebRequest.Create(url + "/users.json?per_page=20");
             request.Headers.Add("Authorization", "Basic " + encoded);
             try {
                 Response = (HttpWebResponse)request.GetResponse();
                 using (StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream())) {
                     //Deserialziing received JSON string into a List of Users.
                     users = JsonConvert.DeserializeObject<List<User>>(sr.ReadLine());
+                
                 }
+             
             } catch (WebException ex) {
                 Response = (HttpWebResponse)ex.Response;
                 int responseCode = (int)Response.StatusCode;
                 Trace.WriteLine("Error. Status Code : " + responseCode);
             }
+            Response.Close();
+
             return users;
         }
         /// <summary>
@@ -94,6 +100,9 @@ namespace CSAlumni {
                     }
                 }
                
+            }
+            if (Response != null) {
+                Response.Close();
             }
             return isValid;
         }

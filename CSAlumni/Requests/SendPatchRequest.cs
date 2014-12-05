@@ -46,6 +46,8 @@ namespace CSAlumni
             Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
             Response = (HttpWebResponse)request.GetResponse();
+            Response.Close();
+
             return (int)Response.StatusCode;
         }
     }

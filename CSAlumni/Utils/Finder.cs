@@ -16,14 +16,14 @@ namespace CSAlumni.Utils {
         /// <param name="userList">List of Users (Preferably up-to-date)</param>
         /// <returns>A user if found. </returns>
         public static User findUserById(int id, List<User> userList) {
-            User FoundUser = null;
+            User foundUser = null;
             foreach (User user in userList) {
                 if (user.Id == id) {
-                    FoundUser = user;
+                    foundUser = user;
                     break;
                 }
             }
-            return FoundUser;
+            return foundUser;
         }
         /// <summary>
         /// Find User by its email address.
@@ -32,14 +32,14 @@ namespace CSAlumni.Utils {
         /// <param name="userList">List of Users (Preferably up-to-date)</param>
         /// <returns>A user if found. </returns>
         public static User findUserByEmail(string email, List<User> userList) {
-            User FoundUser = null;
+            User foundUser = null;
             foreach (User user in userList) {
                 if (user.Email.Equals(email)) {
-                    FoundUser = user;
+                    foundUser = user;
                     break;
                 }
             }
-            return FoundUser;
+            return foundUser;
         }
         /// <summary>
         /// Find User by its surname.
@@ -48,14 +48,14 @@ namespace CSAlumni.Utils {
         /// <param name="userList">List of Users (Preferably up-to-date)</param>
         /// <returns>A user if found. </returns>
         public static User findUserBySurname(string surname, List<User> userList) {
-            User FoundUser = null;
+            User foundUser = null;
             foreach (User user in userList) {
                 if (user.Surname.Equals(surname)) {
-                    FoundUser = user;
+                    foundUser = user;
                     break;
                 }
             }
-            return FoundUser;
+            return foundUser;
         }
         /// <summary>
         /// Find Broadcast by its ID.
@@ -87,6 +87,39 @@ namespace CSAlumni.Utils {
                 }
             }
             return foundBroadcast;
+        }
+
+        public static User findUserByFirstname(string firstname, List<User> userList) {
+            User foundUser = null;
+            foreach (User user in userList) {
+                if (user.Firstname.Equals(firstname)) {
+                    foundUser = user;
+                    break;
+                }
+            }
+            return foundUser;
+        }
+
+        public static User findUserByGradYear(int gradYear, List<User> userList) {
+            User foundUser = null;
+            foreach (User user in userList) {
+                if (user.Grad_year == gradYear) {
+                    foundUser = user;
+                    break;
+                }
+            }
+            return foundUser;
+        }
+
+        public static User findUserByPhone(string phone, List<User> userList) {
+            User foundUser = null; 
+            foreach (User user in userList) {
+                if (user.Phone.Equals(phone)) {
+                    foundUser = user;
+                    break;
+                }
+            }
+            return foundUser;
         }
     }
 }
