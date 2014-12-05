@@ -60,15 +60,22 @@ namespace CSAlumni {
                 using (StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream())) {
                     //Deserialziing received JSON string into a List of Users.
                     users = JsonConvert.DeserializeObject<List<User>>(sr.ReadLine());
-                
+
+                }
+                Response.Close();
+
+            } catch (WebException ex) {
+                if (ex.Response != null) {
+                    Response = (HttpWebResponse)ex.Response;
+                    int responseCode = (int)Response.StatusCode;
+                    Trace.WriteLine("Error. Status Code : " + responseCode);
+                    Response.Close();
+
+                } else {
+                    Trace.WriteLine("Server unreachable.");
                 }
              
-            } catch (WebException ex) {
-                Response = (HttpWebResponse)ex.Response;
-                int responseCode = (int)Response.StatusCode;
-                Trace.WriteLine("Error. Status Code : " + responseCode);
             }
-            Response.Close();
 
             return users;
         }
@@ -76,8 +83,8 @@ namespace CSAlumni {
         /// Returns whether username/password combination is valid through a basic GET request.
         /// </summary>
         /// <returns>Login is valid or not.</returns>
-        public Boolean LoginIsValid() {
-            Boolean isValid = false;
+        public int LoginIsValid() {
+            int ResponseCode = 0;
             //Basic GET request to determine whether logging user is an admin.
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + "/users.json");
             request.Headers.Add("Authorization", "Basic " + encoded);
@@ -87,7 +94,8 @@ namespace CSAlumni {
                 Response = (HttpWebResponse)request.GetResponse();
                 //If we receive a response, validation succeeded.
                 using (StreamReader sr = new StreamReader(Response.GetResponseStream())) {
-                    isValid = true;
+                    ResponseCode = (int)Response.StatusCode;
+                    Trace.WriteLine((int)Response.StatusCode);
                 }
             } catch (WebException ex) {
                 Response = (HttpWebResponse)ex.Response;
@@ -99,12 +107,14 @@ namespace CSAlumni {
                         Trace.WriteLine(responseCode);
                     }
                 }
-               
+
             }
             if (Response != null) {
                 Response.Close();
+
             }
-            return isValid;
+            return ResponseCode;
+
         }
     }
 }
