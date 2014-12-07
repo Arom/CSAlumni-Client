@@ -51,7 +51,7 @@ namespace CSAlumni.Views {
             } else {
                 User user = new User(txtFirstName.Text, txtSurname.Text, txtPhone.Text,gradYear, chkJobs.Checked, txtEmail.Text, 0);
                 sendPost.addNew(user);
-                this.Close();
+                this.Dispose(true);
 
             }
             

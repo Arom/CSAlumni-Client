@@ -14,7 +14,6 @@ namespace CSAlumni.Views {
     public partial class UpdateUserForm : Form {
         SendPatchRequest sendPatch;
         SendDeleteRequest sendDelete;
-        ListViewItem item;
         private User user;
         public UpdateUserForm(SendPatchRequest sendPatch, SendDeleteRequest sendDelete, User user) {
             InitializeComponent();
@@ -64,6 +63,7 @@ namespace CSAlumni.Views {
 
         private void btnDeleteUser_Click(object sender, EventArgs e) {
             sendDelete.delete("users", user.Id);
+            //Closes the form
             this.Dispose(true);
         }
     }

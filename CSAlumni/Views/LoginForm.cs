@@ -23,7 +23,7 @@ namespace CSAlumni.Views {
                     MessageBox.Show("Incorrect username or password", "Authentication Error");
                 } else {
                     new MainWindow(username, password, sendGet).Show();
-                    this.Hide();
+                    this.Dispose(true);
                 }
             }
         }

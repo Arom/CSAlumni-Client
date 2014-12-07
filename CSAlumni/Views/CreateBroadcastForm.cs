@@ -61,7 +61,7 @@ namespace CSAlumni.Views {
                 Feeds feed = new Feeds(twitter, facebook, rss, atom, email, csalumni);
                 BroadcastToSend broadcast = new BroadcastToSend(rtxtContent.Text, feed);
                 sendPost.addNew(broadcast);
-                this.Close();
+                this.Dispose(true);
             }
           
         }

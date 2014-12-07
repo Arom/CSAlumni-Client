@@ -114,7 +114,7 @@ namespace CSAlumni {
             DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo);
             if (result == DialogResult.No) {
                 e.Cancel = true;
-            } 
+            }
         }
 
         private void MainWindow_Load(object sender, EventArgs e) {
