@@ -9,11 +9,11 @@ namespace CSAlumni {
     /// </summary>
   public class SendDeleteRequest {
 
-        private string encoded;
-        private string password;
-        private string url;
-        private string username;
-        HttpWebResponse Response;
+        string encoded;
+        string password;
+        string url;
+        string username;
+        HttpWebResponse response;
 
 
         public SendDeleteRequest(string username, string password, string url) {
@@ -29,17 +29,16 @@ namespace CSAlumni {
        /// <param name="id">The ID of the object to be deleted. </param>
        /// <returns>Reponse status code. Excepted 204 for successful request.</returns>
         public int delete(string type, int id) {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + type + "/" + id + ".json");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}/{2}.json", url, type, id));
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.Method = "DELETE";             
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes("");
             Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
-            Response = (HttpWebResponse)request.GetResponse();
-            Response.Close();
+            response = (HttpWebResponse)request.GetResponse();
+            response.Close();
 
-           return (int)Response.StatusCode;
-           // return 204;
+           return (int)response.StatusCode;
         }
     }
 }

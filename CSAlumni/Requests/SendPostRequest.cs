@@ -12,11 +12,11 @@ namespace CSAlumni {
     /// </summary>
     public class SendPostRequest {
     
-        private string encoded;
-        private string password;
-        private string url;
-        private string username;
-        HttpWebResponse Response;
+        string encoded;
+        string password;
+        string url;
+        string username;
+        HttpWebResponse response;
 
 
         public SendPostRequest(string username, string password, string url) {
@@ -36,9 +36,9 @@ namespace CSAlumni {
 
             //Determine what type the object is and set the URL appropriately.
             if (myObject is BroadcastToSend) {
-               request =  (HttpWebRequest)WebRequest.Create(url + "/broadcasts.json");
+                request = (HttpWebRequest)WebRequest.Create(string.Format("{0}/broadcasts.json", url));
             } else if (myObject is User) {
-                request = (HttpWebRequest)WebRequest.Create(url + "/users.json");
+                request = (HttpWebRequest)WebRequest.Create(string.Format("{0}/users.json", url));
             } else {
                 url = null;
             }
@@ -49,11 +49,11 @@ namespace CSAlumni {
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(newObject);
             Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
-            Response = (HttpWebResponse)request.GetResponse();
-            Trace.WriteLine((int)Response.StatusCode);
-            Response.Close();
+            response = (HttpWebResponse)request.GetResponse();
+            Trace.WriteLine((int)response.StatusCode);
+            response.Close();
 
-            return (int)Response.StatusCode;
+            return (int)response.StatusCode;
           
         }
     }

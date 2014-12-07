@@ -16,7 +16,7 @@ namespace CSAlumni
     /// </summary>
     public class SendPatchRequest
     {
-        private HttpWebResponse Response;
+        HttpWebResponse response;
         string password;
         string username;
         string encoded;
@@ -36,7 +36,7 @@ namespace CSAlumni
         /// <returns>Status code of the request. 204 is expected. </returns>
         public int patchUser(User user)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url+"/users/"+user.Id+".json");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format("{0}/users/{1}.json", url, user.Id));
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";
             request.Method = "PATCH";
@@ -45,10 +45,10 @@ namespace CSAlumni
             byte[] toSend = System.Text.Encoding.ASCII.GetBytes(updateUser);
             Stream os = request.GetRequestStream();
             os.Write(toSend, 0, toSend.Length);
-            Response = (HttpWebResponse)request.GetResponse();
-            Response.Close();
+            response = (HttpWebResponse)request.GetResponse();
+            response.Close();
 
-            return (int)Response.StatusCode;
+            return (int)response.StatusCode;
         }
     }
 }

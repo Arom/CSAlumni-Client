@@ -81,7 +81,7 @@ namespace CSAlumni.Utils {
         public static Broadcast findBroadcastByContent(string content, List<Broadcast> broadcastList) {
             Broadcast foundBroadcast = null;
             foreach (Broadcast broadcast in broadcastList) {
-                if (broadcast.content.Equals(content)) {
+                if (broadcast.Content.Equals(content)) {
                     foundBroadcast = broadcast;
                     break;
                 }

@@ -9,39 +9,37 @@ using System.Windows.Forms;
 namespace CSAlumni {
 
     public partial class MainWindow : Form {
-        public string password;
 
-        public SendGetRequest sendGet;
-        public SendPostRequest sendPost;
-        public SendPatchRequest sendPatch;
+        public SendGetRequest SendGet;
+        public SendPostRequest SendPost;
+        public SendPatchRequest SendPatch;
 
-        //178.62.230.34
-        public string url = "http://178.62.230.34/";
-        public string username;
-       // private Finder Finder;
+        public string Url = "http://178.62.230.34/";
+        public string Password;
+        public string Username;
         private List<Broadcast> broadcastList;
         private SendDeleteRequest sendDelete;
         private List<User> userList;
 
         public MainWindow(string username, string password, SendGetRequest sendGet) {
             InitializeComponent();
-            this.username = username;
-            this.password = password;
-            this.sendGet = sendGet;
+            this.Username = username;
+            this.Password = password;
+            this.SendGet = sendGet;
         }
 
         private void btnCreateUser_Click(object sender, EventArgs e) {
-            new CreateUserForm(sendPost).Show();
+            new CreateUserForm(SendPost).Show();
         }
 
         private void btnUpdateBroadcasts_Click(object sender, EventArgs e) {
             listView2.Items.Clear();
-            buildBroadcastListView(sendGet.getBroadcastList());
+            buildBroadcastListView(SendGet.getBroadcastList());
         }
 
         private void btnUpdateUser_Click(object sender, EventArgs e) {
             listView1.Items.Clear();
-            buildUserListView(sendGet.getUserList());
+            buildUserListView(SendGet.getUserList());
         }
 
         private void buildBroadcastListView(List<Broadcast> broadcasts) {
@@ -51,11 +49,11 @@ namespace CSAlumni {
                 foreach (Broadcast broadcast in broadcasts) {
                     ListViewItem item = new ListViewItem();
                     foreach (Feed feed in broadcast.Feeds) {
-                        sb.Append(feed.name + " ");
+                        sb.Append(feed.Name + " ");
                     }
                     item.Text = sb.ToString();
                     sb.Clear();
-                    item.SubItems.Add(broadcast.content);
+                    item.SubItems.Add(broadcast.Content);
                     item.SubItems.Add("" + broadcast.id);
                     listView2.Items.Add(item);
                 }
@@ -120,17 +118,17 @@ namespace CSAlumni {
         }
 
         private void MainWindow_Load(object sender, EventArgs e) {
-            sendPatch = new SendPatchRequest(username, password, url);
-            sendPost = new SendPostRequest(username, password, url);
-            sendDelete = new SendDeleteRequest(username, password, url);
+            SendPatch = new SendPatchRequest(Username, Password, Url);
+            SendPost = new SendPostRequest(Username, Password, Url);
+            sendDelete = new SendDeleteRequest(Username, Password, Url);
 
-            buildUserListView(sendGet.getUserList());
-            buildBroadcastListView(sendGet.getBroadcastList());
+            buildUserListView(SendGet.getUserList());
+            buildBroadcastListView(SendGet.getBroadcastList());
 
         }
 
         private void btnCreateBroadcast_Click(object sender, EventArgs e) {
-            new CreateBroadcastForm(sendPost).Show();
+            new CreateBroadcastForm(SendPost).Show();
         }
      
         private void editToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -138,7 +136,7 @@ namespace CSAlumni {
             int id = Convert.ToInt32(item.SubItems[5].Text);
 
             if (item != null) {
-                new UpdateUserForm(sendPatch, sendDelete, Finder.findUserById(id, userList)).Show();
+                new UpdateUserForm(SendPatch, sendDelete, Finder.findUserById(id, userList)).Show();
             }
         }
 
@@ -174,7 +172,7 @@ namespace CSAlumni {
                    foundUser = Finder.findUserBySurname(searchTerm, userList);
                }
                if (foundUser != null) {
-                   new UpdateUserForm(sendPatch,sendDelete, foundUser).Show();
+                   new UpdateUserForm(SendPatch,sendDelete, foundUser).Show();
                } else {
                    sb.Append("User not found.");
                }

@@ -15,7 +15,7 @@ namespace CSAlumni.Views {
     /// This is a form used to create new Users called from within MainWindow.
     /// </summary>
     public partial class CreateUserForm : Form {
-        public SendPostRequest sendPost;
+        SendPostRequest sendPost;
         public CreateUserForm(SendPostRequest sendPost) {
             InitializeComponent();
             this.sendPost = sendPost;

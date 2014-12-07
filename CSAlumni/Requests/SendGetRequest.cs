@@ -10,11 +10,11 @@ namespace CSAlumni {
     /// This class is used to send GET requests to the server.
     /// </summary>
     public class SendGetRequest {
-        private string encoded;
-        private string password;
-        private string url;
-        private string username;
-        HttpWebResponse Response;
+        string encoded;
+        string password;
+        string url;
+        string username;
+        HttpWebResponse response;
 
 
         public SendGetRequest(string username, string password, string url) {
@@ -29,21 +29,21 @@ namespace CSAlumni {
         /// <returns>List<Broadcast> object containing current broadcasts.</returns>
         public List<Broadcast> getBroadcastList() {
             List<Broadcast> broadcasts = null;
-            WebRequest request = WebRequest.Create(url + "broadcasts.json?per_page=200");
+            WebRequest request = WebRequest.Create(string.Format("{0}broadcasts.json?per_page=200", url));
             request.Headers.Add("Authorization", "Basic " + encoded);
             try {
-                Response = (HttpWebResponse)request.GetResponse();
+                response = (HttpWebResponse)request.GetResponse();
                 using (StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream())) {
                     string line = sr.ReadLine();
                     //Deserialziing received JSON string into a List of Broadcasts.
                     broadcasts = JsonConvert.DeserializeObject<List<Broadcast>>(line);
                 }
             } catch (WebException ex) {
-                Response = (HttpWebResponse)ex.Response;
-                int responseCode = (int)Response.StatusCode;
+                response = (HttpWebResponse)ex.Response;
+                int responseCode = (int)response.StatusCode;
                 Trace.WriteLine("Error occured, Status Code " + responseCode);
             }
-            Response.Close();
+            response.Close();
 
             return broadcasts;
         }
@@ -56,20 +56,20 @@ namespace CSAlumni {
             WebRequest request = WebRequest.Create(url + "/users.json?per_page=20");
             request.Headers.Add("Authorization", "Basic " + encoded);
             try {
-                Response = (HttpWebResponse)request.GetResponse();
+                response = (HttpWebResponse)request.GetResponse();
                 using (StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream())) {
                     //Deserialziing received JSON string into a List of Users.
                     users = JsonConvert.DeserializeObject<List<User>>(sr.ReadLine());
 
                 }
-                Response.Close();
+                response.Close();
 
             } catch (WebException ex) {
                 if (ex.Response != null) {
-                    Response = (HttpWebResponse)ex.Response;
-                    int responseCode = (int)Response.StatusCode;
+                    response = (HttpWebResponse)ex.Response;
+                    int responseCode = (int)response.StatusCode;
                     Trace.WriteLine("Error. Status Code : " + responseCode);
-                    Response.Close();
+                    response.Close();
 
                 } else {
                     Trace.WriteLine("Server unreachable.");
@@ -84,23 +84,23 @@ namespace CSAlumni {
         /// </summary>
         /// <returns>Login is valid or not.</returns>
         public int LoginIsValid() {
-            int ResponseCode = 0;
+            int responseCode = 0;
             //Basic GET request to determine whether logging user is an admin.
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + "/users.json");
             request.Headers.Add("Authorization", "Basic " + encoded);
             request.ContentType = "application/json";
             request.Method = "GET";
             try {
-                Response = (HttpWebResponse)request.GetResponse();
+                response = (HttpWebResponse)request.GetResponse();
                 //If we receive a response, validation succeeded.
-                using (StreamReader sr = new StreamReader(Response.GetResponseStream())) {
-                    ResponseCode = (int)Response.StatusCode;
-                    Trace.WriteLine((int)Response.StatusCode);
+                using (StreamReader sr = new StreamReader(response.GetResponseStream())) {
+                    responseCode = (int)response.StatusCode;
+                    Trace.WriteLine((int)response.StatusCode);
                 }
             } catch (WebException ex) {
-                Response = (HttpWebResponse)ex.Response;
-                if (Response != null) {
-                    int responseCode = (int)Response.StatusCode;
+                response = (HttpWebResponse)ex.Response;
+                if (response != null) {
+                    responseCode = (int)response.StatusCode;
                     if (responseCode == 41) {
                         Trace.WriteLine("Invalid login credentials. Status code: " + responseCode);
                     } else {
@@ -109,11 +109,11 @@ namespace CSAlumni {
                 }
 
             }
-            if (Response != null) {
-                Response.Close();
+            if (response != null) {
+                response.Close();
 
             }
-            return ResponseCode;
+            return responseCode;
 
         }
     }

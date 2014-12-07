@@ -12,9 +12,9 @@ namespace CSAlumni
    public class Feed
     {
        //Feed name, typically something like "twitter", "facebook", "email" etc. 
-        public string name { get; set; }
+        public string Name { get; set; }
         public Feed(string name) {
-            this.name = name;
+            this.Name = name;
         }
 
     }

@@ -13,18 +13,18 @@ namespace CSAlumni{
    public class Broadcast
     {
        //Broadcast content
-        public string content { get; set; }
+        public string Content { get; set; }
        //List of Broadcast Feed object.
         public List<Feed> Feeds { get; set; }
        //Date when the Broadcast was created.
-        public string created_at { get; set; }
+        public string Created_at { get; set; }
        //Broadcast id
         public int id { get; set; }
         public Broadcast(string content, List<Feed> feeds, int id,string created_at="")
         {
-            this.content = content;
+            this.Content = content;
             this.Feeds = feeds;
-            this.created_at = created_at;
+            this.Created_at = created_at;
             this.id = id;
         }
 

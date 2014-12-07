@@ -12,15 +12,15 @@ using System.Windows.Forms;
 
 namespace CSAlumni.Views {
     public partial class UpdateUserForm : Form {
-        public SendPatchRequest SendPatch;
-        public SendDeleteRequest SendDelete;
-        public ListViewItem Item;
-        private User User;
+        SendPatchRequest sendPatch;
+        SendDeleteRequest sendDelete;
+        ListViewItem item;
+        private User user;
         public UpdateUserForm(SendPatchRequest sendPatch, SendDeleteRequest sendDelete, User user) {
             InitializeComponent();
-            this.SendPatch = sendPatch;
-            this.SendDelete = sendDelete;
-            this.User = user;
+            this.sendPatch = sendPatch;
+            this.sendDelete = sendDelete;
+            this.user = user;
             txtFirstName.Text = user.Firstname;
             txtSurname.Text = user.Surname;
             txtPhone.Text = user.Phone;
@@ -48,14 +48,14 @@ namespace CSAlumni.Views {
             if (sb.Length != 0) {
                 MessageBox.Show(sb.ToString(), "Validation errors");
             } else {
-                User.Email = txtEmail.Text;
-                User.Firstname = txtFirstName.Text;
-                User.Surname = txtSurname.Text;
-                User.Jobs = chkJobs.Checked;
-                User.Phone = txtPhone.Text;
-                User.Grad_year = User.Grad_year;
+                user.Email = txtEmail.Text;
+                user.Firstname = txtFirstName.Text;
+                user.Surname = txtSurname.Text;
+                user.Jobs = chkJobs.Checked;
+                user.Phone = txtPhone.Text;
+                user.Grad_year = user.Grad_year;
 
-                SendPatch.patchUser(User);  
+                sendPatch.patchUser(user);  
                 this.Close();
 
             }
@@ -63,7 +63,7 @@ namespace CSAlumni.Views {
         }
 
         private void btnDeleteUser_Click(object sender, EventArgs e) {
-            SendDelete.delete("users", User.Id);
+            sendDelete.delete("users", user.Id);
             this.Dispose(true);
         }
     }

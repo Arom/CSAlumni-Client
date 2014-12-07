@@ -23,11 +23,8 @@ namespace CSAlumni.Utils {
         /// <param name="s">String to be checked.</param>
         /// <returns>String empty/null or not.</returns>
         public static Boolean isEmpty(string s) {
-            if (String.IsNullOrEmpty(s))
-                return true;
-            else {
-                return false;
-            }
+            return (String.IsNullOrEmpty(s));
+             
         }
     }
 }
