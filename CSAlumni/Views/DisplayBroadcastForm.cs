@@ -15,15 +15,12 @@ namespace CSAlumni.Views {
     public partial class DisplayBroadcastForm : Form {
         public DisplayBroadcastForm(Broadcast broadcast) {
             InitializeComponent();
-            picTwitter.Visible = false;
-            picMail.Visible = false;
-            picFacebook.Visible = false;
             rtxtBroadcastContent.Text = broadcast.Content;
             foreach (Feed feed in broadcast.Feeds) {
-                if (feed.Name.Equals("twitter")) {
+                if(feed.Name.Equals("twitter")) {
                     picTwitter.Visible = true;
                 } else if (feed.Name.Equals("email")) {
-                    picMail.Visible = true;
+                   picMail.Visible = true;
                 }
             }
         }

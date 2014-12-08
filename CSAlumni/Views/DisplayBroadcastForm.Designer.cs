@@ -24,13 +24,13 @@
         /// </summary>
         private void InitializeComponent() {
             this.rtxtBroadcastContent = new System.Windows.Forms.RichTextBox();
-            this.picFacebook = new System.Windows.Forms.PictureBox();
-            this.picTwitter = new System.Windows.Forms.PictureBox();
-            this.picMail = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.picFacebook)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTwitter)).BeginInit();
+            this.picMail = new System.Windows.Forms.PictureBox();
+            this.picTwitter = new System.Windows.Forms.PictureBox();
+            this.picFacebook = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picMail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTwitter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFacebook)).BeginInit();
             this.SuspendLayout();
             // 
             // rtxtBroadcastContent
@@ -43,33 +43,6 @@
             this.rtxtBroadcastContent.TabIndex = 0;
             this.rtxtBroadcastContent.Text = "";
             // 
-            // picFacebook
-            // 
-            this.picFacebook.Image = global::CSAlumni.Properties.Resources.fb;
-            this.picFacebook.Location = new System.Drawing.Point(133, 103);
-            this.picFacebook.Name = "picFacebook";
-            this.picFacebook.Size = new System.Drawing.Size(32, 32);
-            this.picFacebook.TabIndex = 1;
-            this.picFacebook.TabStop = false;
-            // 
-            // picTwitter
-            // 
-            this.picTwitter.Image = global::CSAlumni.Properties.Resources.twitter;
-            this.picTwitter.Location = new System.Drawing.Point(57, 103);
-            this.picTwitter.Name = "picTwitter";
-            this.picTwitter.Size = new System.Drawing.Size(32, 32);
-            this.picTwitter.TabIndex = 2;
-            this.picTwitter.TabStop = false;
-            // 
-            // picMail
-            // 
-            this.picMail.Image = global::CSAlumni.Properties.Resources.email;
-            this.picMail.Location = new System.Drawing.Point(95, 103);
-            this.picMail.Name = "picMail";
-            this.picMail.Size = new System.Drawing.Size(32, 32);
-            this.picMail.TabIndex = 3;
-            this.picMail.TabStop = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -79,6 +52,36 @@
             this.label1.Size = new System.Drawing.Size(58, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "Feeds:";
+            // 
+            // picMail
+            // 
+            this.picMail.Image = global::CSAlumni.Properties.Resources.email1;
+            this.picMail.Location = new System.Drawing.Point(95, 103);
+            this.picMail.Name = "picMail";
+            this.picMail.Size = new System.Drawing.Size(32, 32);
+            this.picMail.TabIndex = 3;
+            this.picMail.TabStop = false;
+            this.picMail.Visible = false;
+            // 
+            // picTwitter
+            // 
+            this.picTwitter.Image = global::CSAlumni.Properties.Resources.twitter1;
+            this.picTwitter.Location = new System.Drawing.Point(57, 103);
+            this.picTwitter.Name = "picTwitter";
+            this.picTwitter.Size = new System.Drawing.Size(32, 32);
+            this.picTwitter.TabIndex = 2;
+            this.picTwitter.TabStop = false;
+            this.picTwitter.Visible = false;
+            // 
+            // picFacebook
+            // 
+            this.picFacebook.Image = global::CSAlumni.Properties.Resources.fb1;
+            this.picFacebook.Location = new System.Drawing.Point(133, 103);
+            this.picFacebook.Name = "picFacebook";
+            this.picFacebook.Size = new System.Drawing.Size(32, 32);
+            this.picFacebook.TabIndex = 1;
+            this.picFacebook.TabStop = false;
+            this.picFacebook.Visible = false;
             // 
             // DisplayBroadcastForm
             // 
@@ -92,9 +95,9 @@
             this.Controls.Add(this.rtxtBroadcastContent);
             this.Name = "DisplayBroadcastForm";
             this.Text = "Display Broadcast";
-            ((System.ComponentModel.ISupportInitialize)(this.picFacebook)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTwitter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTwitter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFacebook)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
