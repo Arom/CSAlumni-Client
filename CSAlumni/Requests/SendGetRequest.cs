@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CSAlumni.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,7 +22,7 @@ namespace CSAlumni {
             this.username = username;
             this.password = password;
             this.url = url;
-            encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
+            encoded = StringHelper.EncodeString(username, password);
         }
         /// <summary>
         /// Fetches a current list of broadcasts from the server.

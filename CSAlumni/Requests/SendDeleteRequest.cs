@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using CSAlumni.Utils;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading;
@@ -20,7 +21,7 @@ namespace CSAlumni {
             this.username = username;
             this.password = password;
             this.url = url;
-            encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
+            encoded = StringHelper.EncodeString(username, password);
         }
        /// <summary>
        /// This method deletes an object on the server by its ID.

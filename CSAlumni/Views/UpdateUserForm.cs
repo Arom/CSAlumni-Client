@@ -15,6 +15,12 @@ namespace CSAlumni.Views {
         SendPatchRequest sendPatch;
         SendDeleteRequest sendDelete;
         private User user;
+        /// <summary>
+        /// Updates the form containers with passed user info.
+        /// </summary>
+        /// <param name="sendPatch">SendPatchRequest instance</param>
+        /// <param name="sendDelete">SendDeleteRequest instance</param>
+        /// <param name="user">User object to patch</param>
         public UpdateUserForm(SendPatchRequest sendPatch, SendDeleteRequest sendDelete, User user) {
             InitializeComponent();
             this.sendPatch = sendPatch;
@@ -29,7 +35,9 @@ namespace CSAlumni.Views {
                 chkJobs.Checked = true;
             }
         }
-
+        /// <summary>
+        /// Update user method. Same validation rules as creating user.
+        /// </summary>
         private void btnUpdateUser_Click(object sender, EventArgs e) {
             StringBuilder sb = new StringBuilder();
             int gradYear = 0;

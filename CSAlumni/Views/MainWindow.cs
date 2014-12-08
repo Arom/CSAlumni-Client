@@ -41,7 +41,10 @@ namespace CSAlumni {
             listView1.Items.Clear();
             buildUserListView(SendGet.getUserList());
         }
-
+        /// <summary>
+        /// Adds listViewItems to the listView from the broadcast list.
+        /// </summary>
+        /// <param name="broadcasts">List of Broadcasts to add.</param>
         private void buildBroadcastListView(List<Broadcast> broadcasts) {
             this.broadcastList = broadcasts;
             StringBuilder sb = new StringBuilder();
@@ -59,7 +62,10 @@ namespace CSAlumni {
                 }
             }
         }
-
+        /// <summary>
+        /// Adds listViewItems to the listView from the user list.
+        /// </summary>
+        /// <param name="users">List of Users to add.</param>
         private void buildUserListView(List<User> users) {
             this.userList = users;
             foreach (User user in users) {
@@ -74,7 +80,9 @@ namespace CSAlumni {
                 listView1.Items.Add(item);
             }
         }
-
+        /// <summary>
+        /// Delete broadcast function.
+        /// </summary>
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
             ListViewItem item = listView2.SelectedItems[0];
             int id = Convert.ToInt32(item.SubItems[2].Text);
@@ -84,7 +92,9 @@ namespace CSAlumni {
                 listView2.Items.Remove(item);
             }
         }
-
+        /// <summary>
+        /// Delete user function.
+        /// </summary>
         private void deleteUserToolStripMenuItem_Click(object sender, EventArgs e) {
             ListViewItem item = listView1.SelectedItems[0];
             int id = Convert.ToInt32(item.SubItems[5].Text);
@@ -93,7 +103,9 @@ namespace CSAlumni {
                 listView1.Items.Remove(item);
             }
         }
-
+        /// <summary>
+        /// Right click handler for user list
+        /// </summary>
         private void listView1_MouseClick(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Right) {
                 if (listView1.FocusedItem.Bounds.Contains(e.Location) == true) {
@@ -101,7 +113,9 @@ namespace CSAlumni {
                 }
             }
         }
-
+        /// <summary>
+        /// Right click handler for broadcast list
+        /// </summary>
         private void listView2_MouseClick(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Right) {
                 if (listView2.FocusedItem.Bounds.Contains(e.Location) == true) {
@@ -109,7 +123,9 @@ namespace CSAlumni {
                 }
             }
         }
-
+        /// <summary>
+        /// Checking if user really wants to exit the application.
+        /// </summary>
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e) {
             DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo);
             if (result == DialogResult.No) {
@@ -118,19 +134,24 @@ namespace CSAlumni {
         }
 
         private void MainWindow_Load(object sender, EventArgs e) {
+            //Creating remaining request instances.
             SendPatch = new SendPatchRequest(Username, Password, Url);
             SendPost = new SendPostRequest(Username, Password, Url);
             sendDelete = new SendDeleteRequest(Username, Password, Url);
-
+            //Building user and broadcast list views.
             buildUserListView(SendGet.getUserList());
             buildBroadcastListView(SendGet.getBroadcastList());
 
         }
-
+        /// <summary>
+        /// Create broadcast method. Creates a new CreateBroadcastForm.
+        /// </summary>
         private void btnCreateBroadcast_Click(object sender, EventArgs e) {
             new CreateBroadcastForm(SendPost).Show();
         }
-     
+        /// <summary>
+        /// Edit user method. Creates a new UpdateUserForm
+        /// </summary>
         private void editToolStripMenuItem_Click(object sender, EventArgs e) {
             ListViewItem item = listView1.SelectedItems[0];
             int id = Convert.ToInt32(item.SubItems[5].Text);
@@ -139,7 +160,9 @@ namespace CSAlumni {
                 new UpdateUserForm(SendPatch, sendDelete, Finder.findUserById(id, userList)).Show();
             }
         }
-
+        /// <summary>
+        /// Display broadcast method. Creates a new DisplayBroadcastForm.
+        /// </summary>
         private void displayBroadcastToolStripMenuItem_Click(object sender, EventArgs e) {
      
             ListViewItem item = listView2.SelectedItems[0];
@@ -148,7 +171,12 @@ namespace CSAlumni {
                 new DisplayBroadcastForm(Finder.findBroadcastById(id, broadcastList)).Show();
             }
         }
-
+        /// <summary>
+        /// Find user method. Creates a new UpdateUserForm if user found. Validation rules apply :
+        /// Grad Year higher than 1970, lower than 2014.
+        /// Phone must be a number.
+        /// Search string cannot be empty.
+        /// </summary>
         private void btnFindUser_Click(object sender, EventArgs e) {
             User foundUser = null;
             string searchTerm = null;
